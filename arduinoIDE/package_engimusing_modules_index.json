@@ -1,30 +1,24 @@
 {
-    "packages": [
-	{
-	    "name": "engimusing",
-	    "maintainer": "Engimusing LLC",
-	    "websiteURL": "http://www.engimusing.com/",
-	    "email": "support@engimusing.com",
-	    "help": {
-		"online": "http://www.engimusing.com"
-	    },
-	    "platforms": [
-		{
-		    "name": "Engimusing ARM Cortex-M0+ Boards",
-		    "architecture": "cortex-m0plus",
-		    "version": "1.0.1",
-		    "category": "Contributed",
-		    "url": "https://engimusing.github.io/arduinoIDE/efm48_1/cortex-m0plus-1.0.1.tar.bz2",
-		    "archiveFileName": "cortex-m0plus-1.0.1.tar.bz2",
-		    "checksum": "SHA-256:707b21024aa4bc1bdd59a1f5fe352962620778731d11a5354f5951fa06b67309",
-		    "size": "99124",
-		    "boards": [
-			{
-			    "name": "Engimusing EFMUSB"
-			}
-		    ]
-		}
-	    ]
-	}
-    ]
+	"packages": [{
+		"name": "engimusing",
+		"maintainer": "Engimusing LLC",
+		"websiteURL": "http://www.engimusing.com/",
+		"email": "support@engimusing.com",
+		"help": {
+			"online": "http://www.engimusing.com"
+		},
+		"platforms": [{
+			"name": "Engimusing ARM Cortex-M0+ Boards",
+			"architecture": "cortex-m0plus",
+			"version": "1.0.1",
+			"category": "Contributed",
+			"url": "https://engimusing.github.io/arduinoIDE/efm48_1/cortex-m0plus-1.0.1.tar.bz2",
+			"archiveFileName": "cortex-m0plus-1.0.1.tar.bz2",
+			"checksum": "SHA-256:707b21024aa4bc1bdd59a1f5fe352962620778731d11a5354f5951fa06b67309",
+			"size": "99124",
+			"boards": [{
+				"name": "Engimusing EFMUSB"
+			}]
+		}]
+	}]
 }
