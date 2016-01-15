@@ -14,7 +14,7 @@
           "architecture": "cortex-m0plus",
           "version": "1.0.1",
           "category": "Contributed",
-          "url": "https://http://engimusing.github.io/arduinoIDE/efm48_1/cortex-m0plus-1.0.1.tar.bz2",
+          "url": "https://engimusing.github.io/arduinoIDE/efm48_1/cortex-m0plus-1.0.1.tar.bz2",
           "archiveFileName": "cortex-m0plus-1.0.1.tar.bz2",
           "checksum": "SHA-256:707b21024aa4bc1bdd59a1f5fe352962620778731d11a5354f5951fa06b67309",
           "size": "99124",
@@ -37,27 +37,6 @@
           "name": "arm-none-eabi-gcc",
           "version": "4.8.3-2014q1",
           "systems": [
-            {
-              "host": "i686-mingw32",
-              "archiveFileName": "gcc-arm-none-eabi-4.8.3-2014q1-windows.tar.gz",
-              "url": "http://downloads.arduino.cc/gcc-arm-none-eabi-4.8.3-2014q1-windows.tar.gz",
-              "checksum": "SHA-256:fd8c111c861144f932728e00abd3f7d1107e186eb9cd6083a54c7236ea78b7c2",
-              "size": "84537449"
-            },
-            {
-              "host": "x86_64-apple-darwin",
-              "url": "http://downloads.arduino.cc/gcc-arm-none-eabi-4.8.3-2014q1-mac.tar.gz",
-              "archiveFileName": "gcc-arm-none-eabi-4.8.3-2014q1-mac.tar.gz",
-              "checksum": "SHA-256:3598acf21600f17a8e4a4e8e193dc422b894dc09384759b270b2ece5facb59c2",
-              "size": "52518522"
-            },
-            {
-              "host": "x86_64-pc-linux-gnu",
-              "url": "http://downloads.arduino.cc/gcc-arm-none-eabi-4.8.3-2014q1-linux64.tar.gz",
-              "archiveFileName": "gcc-arm-none-eabi-4.8.3-2014q1-linux64.tar.gz",
-              "checksum": "SHA-256:d23f6626148396d6ec42a5b4d928955a703e0757829195fa71a939e5b86eecf6",
-              "size": "51395093"
-            },
             {
               "host": "i686-pc-linux-gnu",
               "url": "http://downloads.arduino.cc/gcc-arm-none-eabi-4.8.3-2014q1-linux32.tar.gz",
