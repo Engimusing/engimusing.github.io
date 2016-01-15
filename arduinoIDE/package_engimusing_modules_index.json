@@ -16,7 +16,7 @@
           "category": "Contributed",
           "url": "https://http://engimusing.github.io/arduinoIDE/efm48_1/cortex-m0plus-1.0.1.tar.bz2",
           "archiveFileName": "cortex-m0plus-1.0.1.tar.bz2",
-          "checksum": "SHA-256:707b21024aa4bc1bdd59a1f5fe352962620778731d11a5354f5951fa06b67309",
+          "checksum": "SHA-256:5d465be90c103e2eae5e4c782a828ab280b1d924460fce66937956505ee030d7",
           "size": "99124",
           "boards": [
             {
