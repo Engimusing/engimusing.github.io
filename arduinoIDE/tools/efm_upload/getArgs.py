@@ -18,9 +18,9 @@ def getArgs():
 
     '''
 
-    script, filename, tty = argv
+    script, filename, tty, sketchName = argv
 
-    return (filename, tty)
+    return (filename, tty, sketchName)
 
 if __name__ == "__main__":
     args = getArgs()

@@ -30,13 +30,14 @@ def sendPackets(s, filename):
 
     data = stream.read(packet_size)
     if not data:
-        print "File Empty"
-        return 
+        print "Error: Empty Compiled Script File"
+        return False 
 
     errcnt = 0
     fullcrc = 0
-
-    print "Packet Transferred: "
+    
+    print
+    
     while 1:
         pkt = asmPkt(data, sequence)
         fullcrc = verify(data, fullcrc)
@@ -55,28 +56,26 @@ def sendPackets(s, filename):
                 print "checkAck -> True"
                 print " %r" % sequence
             else:
-                sys.stdout.write('>')
+                sys.stdout.write('.')
                 sys.stdout.flush()
             sequence = (sequence + 1) % 0x100  # increment sequence number
             if debug: print sequence
             data = stream.read(packet_size)
             if not data:
                 print
-                print "CRC of file = " + hex(fullcrc)
+                print "CRC:" + hex(fullcrc)
                 return True
         else:
             print
-            print "checkAck -> False"
-            print "Packet %r Failed" % sequence
+            print "Packet %r Failed to Upload" % sequence
             errcnt += 1
             if errcnt > 0:
-                print "Transfer Errors"
+                sys.stdout.flush()
                 return False
 
         continue
 
-    print "Transfer Complete"
-
+    print 
     return True
 
 if __name__ == "__main__":

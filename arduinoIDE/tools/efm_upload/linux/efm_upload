@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+cd ..
+efm_upload.py $1 $2 $3
