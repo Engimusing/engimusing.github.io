@@ -14,6 +14,7 @@ import sys
 import serial
 import time
 import os
+import StringIO
 
 from calcCRC import calc_crc
 from getArgs import getArgs
@@ -141,6 +142,7 @@ try:
         s.close()
         sys.exit(-1)
         
+    #hide sendPackets print outs from the end user
     if(sendPackets(s, args[0])):
         print "Upload Finished"
         sys.stdout.flush()
@@ -154,6 +156,10 @@ try:
 
     print "Starting Sketch"
     sys.stdout.flush()
+    
+    #wait until ? is sent or 1 second, this allows the board enough time to finish the upload before we send the b
+    wait_until(s, '?', 1) 
+    
     s.write('b')
 
     s.close()
