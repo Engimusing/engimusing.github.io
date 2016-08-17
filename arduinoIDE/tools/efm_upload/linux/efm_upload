@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
+cd `dirname $0`
 cd ..
-efm_upload.py $1 $2 $3
+
+./efm_upload.py $1 $2 $3
