@@ -71,7 +71,7 @@ except serial.serialutil.SerialException as err:
     print "Upload Failed"
     sys.exit(-1)
 except IOError as err:
-    print "Error opening serial port" , args[1], ":" , err
+    print "Error opening serial port" , args[1], ": IOError:" , err
     print "Double check the serial port is available and retry."
     print "Upload Failed"
     sys.exit(-1)
@@ -82,7 +82,7 @@ except:
     sys.exit(-1)
     
 try:
-    
+
     if(s.isOpen() == False):
         s.open()
         print args[1] + " is open already"
@@ -176,17 +176,17 @@ try:
     print "Upload Completed Successfully"
     
 except serial.serialutil.SerialException as err:
-    print "Serial port " , args[1], "encountered an error:" , err
+    print "Serial port" , args[1], "encountered an error:" , err
     print "Double check the serial port is available and retry."
     print "Upload Failed"
     sys.exit(-1)
 except IOError as err:
-    print "Serial port " , args[1], "encountered an error:" , err
+    print "Serial port" , args[1], "encountered an error: IOError:" , err
     print "Double check the serial port is available and retry."
     print "Upload Failed"
     sys.exit(-1)
 except:
-    print "Serial port " , args[1], "encountered an error:", sys.exc_info()[0]
+    print "Serial port" , args[1], "encountered an error:", sys.exc_info()[0]
     print "Double check the serial port is available and retry."
     print "Upload Failed"
     sys.exit(-1)
