@@ -92,7 +92,9 @@ try:
     sys.stdout.flush()
     s.sendBreak(0.25)
     s.write('r')
-
+    wait_until(s, 'V', 1) 
+    s.sendBreak(0.25)
+    
     # loop waiting for question mark, send r and ' ' again after timeout
     print "Device Reset Check"
     sys.stdout.flush()
@@ -175,6 +177,7 @@ try:
     s.close()
     print "Upload Completed Successfully"
     
+    
 except serial.serialutil.SerialException as err:
     print "Serial port" , args[1], "encountered an error:" , err
     print "Double check the serial port is available and retry."
@@ -190,3 +193,5 @@ except:
     print "Double check the serial port is available and retry."
     print "Upload Failed"
     sys.exit(-1)
+    
+sys.exit(0)
