@@ -63,7 +63,7 @@ def sendPackets(s, filename):
             data = stream.read(packet_size)
             if not data:
                 print
-                print "CRC:" + hex(fullcrc)
+                # print "CRC:" + hex(fullcrc) # don't print crc since it doesn't match anything that can be calculated by the bootloader
                 return True
         else:
             print
