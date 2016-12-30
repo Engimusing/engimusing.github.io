@@ -92,7 +92,32 @@ try:
     sys.stdout.flush()
     s.sendBreak(0.25)
     s.write('r')
-    wait_until(s, 'V', 1) 
+    
+    print "Firmware Version: "  + s.read(9).strip()
+    
+    #check for a device type printout and compare the software device against the hardware device.
+    s.timeout = 2
+    readString = "T"
+    if(wait_until(s, 'T', 1) == True):
+        readString += s.read(4)
+        if(readString == "Type:"):
+            readString = s.read(16)
+            readString = readString.strip()
+            
+            if(readString == args[3]):
+                print "Verified hardware/software device match."
+            else:
+                print "Device Mismatch!!!"
+                print "Hardware Device:" + readString
+                print "Software Device:" + args[3]
+                print "Change device selection in Tools->Board So the Software is built for the correct device."
+                sys.exit(-1)
+    else:
+        print "Warning: Unknown Hardware Device! Uploading anyways!"
+    
+    s.timeout = None
+    
+    
     s.sendBreak(0.25)
     
     # loop waiting for question mark, send r and ' ' again after timeout
