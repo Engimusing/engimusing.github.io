@@ -32,7 +32,10 @@ from sets import Set
 subscriptions = Set()
 
 serialPort = "COM1"
-hostAddress = "localhost"
+mqttHostAddress = "localhost"
+mqttPort = 1883
+mqttUsername = "username"
+mqttPassword = "password"
 
 def getSerialPort():
     s = serial.Serial(port=serialPort,
@@ -127,7 +130,8 @@ class toMQTT(threading.Thread):
         self.fromSerialPort_q = fromSerialPort_q
 
         mqttp.on_connect = on_connectp
-        mqttp.connect("localhost",1883,60)
+        mqttp.username_pw_set(mqttUsername, mqttPassword)
+        mqttp.connect(mqttHostAddress,mqttPort,60)
 
         self.stoprequest = threading.Event()
 
@@ -187,15 +191,20 @@ def on_message(mqttc, userdata, msg):
 def main(args):
     print args
     global serialPort
-    global hostAddress
+    global mqttHostAddress
+    global mqttPort
+    global mqttUsername
+    global mqttPassword
     if len(args) > 0:
         serialPort = args[0]
-    
-    print serialPort
-    
     if len(args) > 1:
-        hostAddress = args[1]
-    
+        mqttHostAddress = args[1]
+    if len(args) > 2:
+        mqttPort = args[2]
+    if len(args) > 3:
+        mqttUsername = args[3]
+    if len(args) > 4:
+        mqttPassword = args[4]
     
     
     
@@ -205,7 +214,10 @@ def main(args):
 
     mqttc.on_connect = on_connectc
     mqttc.on_message = on_message
-    mqttc.connect(hostAddress,1883,60)
+    
+    mqttc.username_pw_set(mqttUsername, mqttPassword)
+    mqttc.connect(mqttHostAddress,mqttPort,60)
+
 
     toSer    = toSerialThread(toSerialPort_q=toSerialPort_q, serialPort=serialPort)
     fromSer  = fromSerialThread(fromSerialPort_q=fromSerialPort_q, serialPort=serialPort)
@@ -228,7 +240,7 @@ def main(args):
 
 if __name__ == '__main__':
     main(sys.argv[1:])
-if __name__ == 'efmcomm__main__':
+if __name__ == 'efm_serial2mqtt__main__':
     main(sys.argv[1:])
 
 
