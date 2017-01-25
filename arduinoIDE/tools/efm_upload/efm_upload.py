@@ -53,7 +53,7 @@ CRC = chr(0x43) # C
 timeout = 10
 
 args = getArgs()  # get filename and serial port
-print "Uploading {0} to {1}".format(args[2], args[1])
+print "Uploading {0} to {1} - sketch: {2} hardware device: {3}".format(args[0], args[1], args[2], args[3])
 sys.stdout.flush()
 
 try:
