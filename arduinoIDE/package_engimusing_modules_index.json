@@ -41,38 +41,38 @@
 		[
 		    {
 			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_upload-1.0.tar.bz2",
-			"checksum": "SHA-256:72aaf795ad442b2e2bdd8a02fa8150cca50c338599148b476b3b9361a0db7ee9",
+			"checksum": "SHA-256:be85495e4adaeaa061050c1f8f2461e8a97a105be54c9cd664405f6f9d778da8",
 			"host": "x86_64-pc-linux-gnu",
 			"archiveFileName": "efm_upload-1.0.tar.bz2",
-			"size": "9858697"
+			"size": "9858523"
 		    },
 		    {
 			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_upload-1.0.tar.bz2",
-			"checksum": "SHA-256:72aaf795ad442b2e2bdd8a02fa8150cca50c338599148b476b3b9361a0db7ee9",
+			"checksum": "SHA-256:be85495e4adaeaa061050c1f8f2461e8a97a105be54c9cd664405f6f9d778da8",
 			"host": "i686-pc-linux-gnu",
 			"archiveFileName": "efm_upload-1.0.tar.bz2",
-			"size": "9858697"
+			"size": "9858523"
 		    },
 		    {
 			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_upload-1.0.tar.bz2",
-			"checksum": "SHA-256:72aaf795ad442b2e2bdd8a02fa8150cca50c338599148b476b3b9361a0db7ee9",
+			"checksum": "SHA-256:be85495e4adaeaa061050c1f8f2461e8a97a105be54c9cd664405f6f9d778da8",
 			"host": "i686-mingw32",
 			"archiveFileName": "efm_upload-1.0.tar.bz2",
-			"size": "9858697"
+			"size": "9858523"
 		    },
 		    {
 			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_upload-1.0.tar.bz2",
-			"checksum": "SHA-256:72aaf795ad442b2e2bdd8a02fa8150cca50c338599148b476b3b9361a0db7ee9",
+			"checksum": "SHA-256:be85495e4adaeaa061050c1f8f2461e8a97a105be54c9cd664405f6f9d778da8",
 			"host": "x86_64-apple-darwin",
 			"archiveFileName": "efm_upload-1.0.tar.bz2",
-			"size": "9858697"
+			"size": "9858523"
 		    },
 		    {
 			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_upload-1.0.tar.bz2",
-			"checksum": "SHA-256:72aaf795ad442b2e2bdd8a02fa8150cca50c338599148b476b3b9361a0db7ee9",
+			"checksum": "SHA-256:be85495e4adaeaa061050c1f8f2461e8a97a105be54c9cd664405f6f9d778da8",
 			"host": "i386-apple-darwin",
 			"archiveFileName": "efm_upload-1.0.tar.bz2",
-			"size": "9858697"
+			"size": "9858523"
 		    }]
             }]
     }]
