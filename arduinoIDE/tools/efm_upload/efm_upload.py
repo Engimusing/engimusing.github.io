@@ -16,6 +16,11 @@ import time
 import os
 import StringIO
 
+try:
+    import fcntl
+except:
+    pass
+
 from calcCRC import calc_crc
 from getArgs import getArgs
 from tty import wait_until
@@ -65,6 +70,14 @@ try:
                   timeout=None,
                   xonxoff=0,
                   rtscts=0)
+    try:
+        fcntl.flock(s.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except IOError:
+        print 'Port {0} is busy'.format(args[1])
+        sys.exit(-1)
+    except:
+        pass #windows doesn't have fcntl so ignore thisZ
+
 except serial.serialutil.SerialException as err:
     print "Error opening serial port" , args[1], ":" , err
     print "Double check the serial port is available and retry."
@@ -81,6 +94,7 @@ except:
     print "Upload Failed"
     sys.exit(-1)
     
+
 try:
 
     if(s.isOpen() == False):
