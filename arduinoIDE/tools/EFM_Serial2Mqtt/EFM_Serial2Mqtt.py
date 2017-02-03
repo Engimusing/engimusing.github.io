@@ -343,6 +343,7 @@ if __name__ == '__main__':
     main(sys.argv[1:])
 if __name__ == 'efm_serial2mqtt__main__':
     main(sys.argv[1:])
+    
 
 
 
