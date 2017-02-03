@@ -27,6 +27,8 @@ import time
 import json
 import paho.mqtt.client as mqtt
 import sys
+import time
+import getopt
 
 try:
     import fcntl
@@ -36,14 +38,21 @@ except:
 from sets import Set
 subscriptions = Set()
 
-serialPort = "COM1"
+if os.name == 'nt':
+    serialPort = "COM1"
+else:
+    serialPort = "/dev/ttyUSB0"
+    
 mqttHostAddress = "localhost"
 mqttPort = 1883
 mqttUsername = "username"
 mqttPassword = "password"
+initialRetries = 0
+
 
 def getSerialPort():
-    s = serial.Serial(port=serialPort,
+    try:
+        s = serial.Serial(port=serialPort,
                       baudrate=115200, 
                       bytesize=8,
                       parity='N',
@@ -51,18 +60,25 @@ def getSerialPort():
                       timeout=0.05,
                       xonxoff=0,
                       rtscts=0)
-    try:
-        fcntl.flock(s.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except IOError:
-        print 'Port {0} is busy'.format(sys.argv[1])
-        sys.exit(-1)
-    except:
-        pass #windows doesn't have fcntl so ignore this
+        
+    
+        try:
+            fcntl.flock(s.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except IOError:
+            print 'Port {0} is busy'.format(serialPort)
+            sys.exit(-1)
+        except:
+            pass #windows doesn't have fcntl so ignore this
 
-    if(s.isOpen() == False):
-        s.open()
-    if(s.isOpen() == True):
-        return s
+        if(s.isOpen() == False):
+            s.open()
+        if(s.isOpen() == True):
+            return s
+            
+    except serial.SerialException as e:
+        print 'Serial port failed to connect. Make sure no other applications are using the port and you have the proper permissions. Error message:'
+        print e
+        os._exit(-1)
 
 class toSerialThread(threading.Thread):
     """ A worker thread that receives strings from the toSerialPort_q queue
@@ -95,7 +111,7 @@ class fromSerialThread(threading.Thread):
     """ A worker thread that receives strings from the serial port and
         puts them in the fromSerialPort_q queue.
     """
-
+    
     jsonStr = ""
 
     def __init__(self, fromSerialPort_q, serialPort):
@@ -105,12 +121,37 @@ class fromSerialThread(threading.Thread):
         self.stoprequest = threading.Event()
 
     def run(self):
+        global initialRetries
+        retries = initialRetries
+        
         while not self.stoprequest.isSet():
             try:
+                
                 fromSerialPortString = self.serialPort.read(200).translate(None, string.whitespace)
-            except serial.SerialException:
-                print 'Serial port closed'
-                os._exit(-1)
+                
+                if retries != initialRetries:
+                    retries = initialRetries
+                    print 'Serial Port Reconnected.'
+                
+            
+            except (serial.SerialException, OSError):
+                if retries == initialRetries:
+                    print 'Serial Port Disconnected'
+                else:
+                    print 'Serial Port Reconnect Failed'
+                if retries == 0:
+                    os._exit(-1)
+                retries -= 1
+                print 'Retrying Serial Port in 5 seconds'
+                if retries > 0:
+                    print '{0} retries remaining.'.format(retries)
+                time.sleep(5)
+                try:
+                    self.serialPort.close()
+                    self.serialPort.open()
+                except serial.SerialException:
+                    pass
+                
                 
             self.jsonStr += fromSerialPortString
             if '{' in self.jsonStr:
@@ -140,6 +181,14 @@ def on_connectp(mqttp, userdata, rc):
     print("mqttp connected with result code "+str(rc))
     mqttp.subscribe("home/habtutor/#")
 
+def on_disconnectp(mqttp, userdata, rc):
+    print("mqttp disconnected with result code "+str(rc))
+ 
+""" code for enabling logging if we want to att that in
+def on_log(mqttp, userdata, level, buf):
+    if level == mqtt.MQTT_LOG_WARNING:
+        print buf
+"""
 
 class toMQTT(threading.Thread):
     """ A worker thread that receives strings from the fromSerialPort_q queue
@@ -150,8 +199,16 @@ class toMQTT(threading.Thread):
         self.fromSerialPort_q = fromSerialPort_q
 
         mqttp.on_connect = on_connectp
-        mqttp.username_pw_set(mqttUsername, mqttPassword)
-        mqttp.connect(mqttHostAddress,mqttPort,60)
+        mqttp.on_disconnect = on_disconnectp
+        #mqttp.on_log = on_log
+        
+        try:
+            mqttp.username_pw_set(mqttUsername, mqttPassword)
+            mqttp.connect(mqttHostAddress,mqttPort,60)
+        except:
+            print 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort)
+            os._exit(-1)
+
 
         self.stoprequest = threading.Event()
 
@@ -194,6 +251,10 @@ def on_connectc(mqttc, userdata, rc):
         mqttc.subscribe(s)
     
 
+def on_disconnectc(mqttc, userdata, rc):
+    print("mqttc disconnected with result code "+str(rc))
+    
+    
 toSerialPort_q = Queue.Queue()
 
 def on_message(mqttc, userdata, msg):
@@ -208,24 +269,39 @@ def on_message(mqttc, userdata, msg):
     except Queue.Full:
         print "toSerialPort_q full"
 
-def main(args):
-    print args
+def main(argv):
     global serialPort
     global mqttHostAddress
     global mqttPort
     global mqttUsername
     global mqttPassword
-    if len(args) > 0:
-        serialPort = args[0]
-    if len(args) > 1:
-        mqttHostAddress = args[1]
-    if len(args) > 2:
-        mqttPort = args[2]
-    if len(args) > 3:
-        mqttUsername = args[3]
-    if len(args) > 4:
-        mqttPassword = args[4]
+    global initialRetries
     
+    try:
+        opts, args = getopt.getopt(argv, "hp:a:m:u:w:r:", ["serialPort=","mqttHostAddress=", "mqttPort=", "mqttUsername=", "mqttPassword=", "retries="])
+    except getopt.GetoptError:
+        print 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>'
+        sys.exit(-1)
+   
+    for opt, arg in opts:        
+        if opt == '-h':
+            print 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>'
+            sys.exit(-1)
+        elif opt in ("-p", "--serialPort"):
+            serialPort = arg
+        elif opt in ("-a", "--mqttHostAddress"):
+            mqttHostAddress = arg
+        elif opt in ("-m", "--mqttPort"):
+            mqttPort = arg
+        elif opt in ("-u", "--mqttUsername"):
+            mqttUsername = arg
+        elif opt in ("-w", "--mqttPassword"):
+            mqttPassword = arg
+        elif opt in ("-r", "--retries"):
+            try:
+                initialRetries = int(arg)
+            except:
+                print 'retries argument not an integer'
     
     
     # Create a single input and a single output queue for all threads.
@@ -234,10 +310,15 @@ def main(args):
 
     mqttc.on_connect = on_connectc
     mqttc.on_message = on_message
+    mqttc.on_disconnect = on_disconnectc
+    #mqttc.on_log = on_log
     
-    mqttc.username_pw_set(mqttUsername, mqttPassword)
-    mqttc.connect(mqttHostAddress,mqttPort,60)
-
+    try:
+        mqttc.username_pw_set(mqttUsername, mqttPassword)
+        mqttc.connect(mqttHostAddress,mqttPort,60)
+    except:
+        print 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort)
+        os._exit(-1)
 
     toSer    = toSerialThread(toSerialPort_q=toSerialPort_q, serialPort=serialPort)
     fromSer  = fromSerialThread(fromSerialPort_q=fromSerialPort_q, serialPort=serialPort)
