@@ -29,14 +29,14 @@
 	    },
 				  {
 				      "packager": "engimusing",
-				      "name": "efm_upload",
+				      "name": "efm_tools",
 				      "version": "1.0"
 				  }]
 	}],
 	"tools": [
             {
 		"version": "1.0",
-		"name": "efm_upload",
+		"name": "efm_tools",
 "systems":
 [
 {
