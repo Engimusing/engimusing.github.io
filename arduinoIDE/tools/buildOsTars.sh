@@ -1,49 +1,44 @@
-mkdir efm_upload-1.0
-mkdir EFM_Serial2Mqtt-1.0
+mkdir efm_tools-1.0
+mkdir efm_tools-1.0/efm_upload
+mkdir efm_tools-1.0/EFM_Serial2Mqtt
 
 #setup linux32-bit
-cp efm_upload/efm_upload.py efm_upload-1.0/
-cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py EFM_Serial2Mqtt-1.0/
+cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
-cp -r efm_upload/linux efm_upload-1.0/linux
-cp -r EFM_Serial2Mqtt/ubuntu32 EFM_Serial2Mqtt-1.0/linux
+cp -r efm_upload/linux efm_tools-1.0/efm_upload/linux
+cp -r EFM_Serial2Mqtt/ubuntu32 efm_tools-1.0/EFM_Serial2Mqtt/linux
 
-tar cvf efm_tools-1.0-linux32.tar efm_upload-1.0
-tar rvf efm_tools-1.0-linux32.tar EFM_Serial2Mqtt-1.0
-gzip -c efm_tools-1.0-linux32.tar > efm_tools-1.0-linux32.tar.gz
+tar czvf efm_tools-1.0-linux32.tar.gz efm_tools-1.0
 
-rm -r efm_upload-1.0/*
-rm -r EFM_Serial2Mqtt-1.0/*
+rm -r efm_tools-1.0/efm_upload/*
+rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup windows 32-bit
-cp efm_upload/efm_upload.py efm_upload-1.0/
-cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py EFM_Serial2Mqtt-1.0/
+cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
-cp -r efm_upload/windows efm_upload-1.0/windows
-cp -r EFM_Serial2Mqtt/windows EFM_Serial2Mqtt-1.0/windows
+cp -r efm_upload/windows efm_tools-1.0/efm_upload/windows
+cp -r EFM_Serial2Mqtt/windows efm_tools-1.0/EFM_Serial2Mqtt/windows
 
-tar cvf efm_tools-1.0-win32.tar efm_upload-1.0
-tar rvf efm_tools-1.0-win32.tar EFM_Serial2Mqtt-1.0
-gzip -c efm_tools-1.0-win32.tar > efm_tools-1.0-win32.tar.gz
+tar czvf efm_tools-1.0-win32.tar.gz efm_tools-1.0
 
-rm -r efm_upload-1.0/*
-rm -r EFM_Serial2Mqtt-1.0/*
+rm -r efm_tools-1.0/efm_upload/*
+rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup osx 64-bit
-cp efm_upload/efm_upload.py efm_upload-1.0/
-cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py EFM_Serial2Mqtt-1.0/
+cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
-cp -r efm_upload/macosx efm_upload-1.0/macosx
-cp -r EFM_Serial2Mqtt/macosx EFM_Serial2Mqtt-1.0/macosx
+cp -r efm_upload/macosx efm_tools-1.0/efm_upload/macosx
+cp -r EFM_Serial2Mqtt/macosx efm_tools-1.0/EFM_Serial2Mqtt/macosx
 
-tar cvf efm_tools-1.0-osx64.tar efm_upload-1.0
-tar rvf efm_tools-1.0-osx64.tar EFM_Serial2Mqtt-1.0
-gzip -c efm_tools-1.0-osx64.tar > efm_tools-1.0-osx64.tar.gz
+tar czvf efm_tools-1.0-osx64.tar.gz efm_tools-1.0
 
+rm -r efm_tools-1.0/efm_upload/*
+rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
-rm -r efm_upload-1.0/
-rm -r EFM_Serial2Mqtt-1.0/
-
+rm -r efm_tools-1.0/
 rm *.tar
 
 #x86_64-pc-linux-gnu
