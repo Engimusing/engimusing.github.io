@@ -3,7 +3,7 @@ mkdir efm_tools-1.0/efm_upload
 mkdir efm_tools-1.0/EFM_Serial2Mqtt
 
 #setup linux32-bit
-cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp efm_upload/*.py efm_tools-1.0/efm_upload/
 cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
 cp -r efm_upload/linux efm_tools-1.0/efm_upload/linux
@@ -15,7 +15,7 @@ rm -r efm_tools-1.0/efm_upload/*
 rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup linux64-bit
-cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp efm_upload/*.py efm_tools-1.0/efm_upload/
 cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
 cp -r efm_upload/linux efm_tools-1.0/efm_upload/linux
@@ -27,7 +27,7 @@ rm -r efm_tools-1.0/efm_upload/*
 rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup windows 32-bit
-cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp efm_upload/*.py efm_tools-1.0/efm_upload/
 cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
 cp -r efm_upload/windows efm_tools-1.0/efm_upload/windows
@@ -39,7 +39,7 @@ rm -r efm_tools-1.0/efm_upload/*
 rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup osx 64-bit
-cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp efm_upload/*.py efm_tools-1.0/efm_upload/
 cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
 cp -r efm_upload/macosx efm_tools-1.0/efm_upload/macosx
@@ -51,7 +51,7 @@ rm -r efm_tools-1.0/efm_upload/*
 rm -r efm_tools-1.0/EFM_Serial2Mqtt/*
 
 #setup arm 32-bit
-cp efm_upload/efm_upload.py efm_tools-1.0/efm_upload/
+cp efm_upload/*.py efm_tools-1.0/efm_upload/
 cp EFM_Serial2Mqtt/EFM_Serial2Mqtt.py efm_tools-1.0/EFM_Serial2Mqtt/
 
 cp -r efm_upload/linux efm_tools-1.0/efm_upload/linux
