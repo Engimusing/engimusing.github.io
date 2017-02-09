@@ -38,50 +38,50 @@
 		"version": "1.0",
 		"name": "efm_tools",
 		"systems":
-		[
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linux64.tar.gz",
-			"checksum": "SHA-256:3034ecb6febafd8d08643ca7544d198c274b043da836d317fb31660483009343",
-			"host": "x86_64-pc-linux-gnu",
-			"archiveFileName": "efm_tools-1.0-linux64.tar.gz",
-			"size": "3921875"
-		    },
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linux32.tar.gz",
-			"checksum": "SHA-256:b2ed2ad64b22ec6159aa1e69ac7be2626ed8dec5ad3c8bb40fadf0840dc8f456",
-			"host": "i686-pc-linux-gnu",
-			"archiveFileName": "efm_tools-1.0-linux32.tar.gz",
-			"size": "2471267"
-		    },
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linuxArm32.tar.gz",
-			"checksum": "SHA-256:1d220a7ecb863adf6823989d727c6c6e3af9be32f2be7aca289d159ac3633b7c",
-			"host": "arm-linux-gnueabihf",
-			"archiveFileName": "efm_tools-1.0-linuxArm32.tar.gz",
-			"size": "2529956"
-		    },
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-win32.tar.gz",
-			"checksum": "SHA-256:48fecbde37051af9c5742127abe1e0f726a3a8926ea199e786fad31b6775e4aa",
-			"host": "i686-mingw32",
-			"archiveFileName": "efm_tools-1.0-win32.tar.gz",
-			"size": "6114483"
-		    },
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-osx64.tar.gz",
-			"checksum": "SHA-256:d08359234d6f6b8129a3d13f499b7b12da475dc0105b71d10c2272d03e74f7f1",
-			"host": "x86_64-apple-darwin",
-			"archiveFileName": "efm_tools-1.0-osx64.tar.gz",
-			"size": "9344940"
-		    },
-		    {
-			"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-osx64.tar.gz",
-			"checksum": "SHA-256:d08359234d6f6b8129a3d13f499b7b12da475dc0105b71d10c2272d03e74f7f1",
-			"host": "i386-apple-darwin",
-			"archiveFileName": "efm_tools-1.0-osx64.tar.gz",
-			"size": "9344940"
-		    }
-		]
+[
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linux64.tar.gz",
+"checksum": "SHA-256:2f4ae218859a61b2f80d71dfdf8652fd97e17b48fafb2f16c3a787737c98245a",
+"host": "x86_64-pc-linux-gnu",
+"archiveFileName": "efm_tools-1.0-linux64.tar.gz",
+"size": "3922139"
+},
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linux32.tar.gz",
+"checksum": "SHA-256:07d0a99c50f80e8c865dec380058907ac59f3827fe18bdfb61c312ccd7236f43",
+"host": "i686-pc-linux-gnu",
+"archiveFileName": "efm_tools-1.0-linux32.tar.gz",
+"size": "2471427"
+},
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-linuxArm32.tar.gz",
+"checksum": "SHA-256:3d9bdc63af6ab2a7cb8e9e5ff6eda89bdc90b2a811aa4ae57919f94864a72f92",
+"host": "arm-linux-gnueabihf",
+"archiveFileName": "efm_tools-1.0-linuxArm32.tar.gz",
+"size": "2530181"
+},
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-win32.tar.gz",
+"checksum": "SHA-256:0f466353cff54a5b25ad8357d7841aaa71c0d75e13600bcfe5bb2e3cf27f3e11",
+"host": "i686-mingw32",
+"archiveFileName": "efm_tools-1.0-win32.tar.gz",
+"size": "6115266"
+},
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-osx64.tar.gz",
+"checksum": "SHA-256:76703d83955bd5be5f064ee8f521eda6e07b3890343cbab9f539470a610acd95",
+"host": "x86_64-apple-darwin",
+"archiveFileName": "efm_tools-1.0-osx64.tar.gz",
+"size": "9348158"
+},
+{
+"url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.0-osx64.tar.gz",
+"checksum": "SHA-256:76703d83955bd5be5f064ee8f521eda6e07b3890343cbab9f539470a610acd95",
+"host": "i386-apple-darwin",
+"archiveFileName": "efm_tools-1.0-osx64.tar.gz",
+"size": "9348158"
+}
+]
             }]
     }]
 }
