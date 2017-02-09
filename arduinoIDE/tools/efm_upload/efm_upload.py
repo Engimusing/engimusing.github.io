@@ -106,15 +106,38 @@ try:
     sys.stdout.flush()
     s.sendBreak(0.25)
     s.write('r')
+ 
+    readString = list(s.read(7))
+    chipIdString = list(s.read(9))
+    s.timeout=1
+    count = 0
+    startTime = time.clock()
+    timeout = 10.0
     
-    print "Firmware Version: "  + s.read(9).strip()
+    while(chipIdString != list(" ChipID: ")):
+        readString[0:-1] = readString[1:]
+        readString[-1] = chipIdString[0]
+        chipIdString[0:-1] = chipIdString[1:]
+        chipIdString[-1] = s.read(1)
+        if(time.clock() - startTime > timeout):
+            print "Failed to find bootloader before timeout. Aborting upload."
+            sys.exit(-1)
+    
+    
+    
+    print "Firmware Version: "  + ''.join(readString)
+    
+    
     
     #check for a device type printout and compare the software device against the hardware device.
     s.timeout = 2
-    readString = "T"
+    found = True
     if(wait_until(s, 'T', 1) == True):
-        readString += s.read(4)
-        if(readString == "Type:"):
+        found = found and wait_until(s, 'y', 1)
+        found = found and wait_until(s, 'p', 1)
+        found = found and wait_until(s, 'e', 1)
+        found = found and wait_until(s, ':', 1)
+        if(found == True):
             readString = s.read(16)
             readString = readString.strip()
             
