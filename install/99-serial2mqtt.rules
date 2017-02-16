@@ -1,1 +1,1 @@
-SUBSYSTEM=="tty", ATTRS{idVendor}=="vid", ATTRS{idProduct}=="pid", ATTRS{serial}=="sn", SYMLINK+="ttyMQTT0"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="vid", ATTRS{idProduct}=="pid", ATTRS{serial}=="sn", SYMLINK+="/dev/ttyMQTT0"
