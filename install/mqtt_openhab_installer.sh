@@ -135,7 +135,7 @@ echo "mkdir .settings file"
 sudo mkdir /opt/smarthome-designer/configuration/.settings
 
 echo "add configuration files to add CONFIG_FOLDER_PREFERENCE=/etc/openhab2 to prefs"
-curl http://engimusing.github.io/install/ > ~/Downloads/org.eclipse.platform_4.4.0_157788997_linux_gtk_x86_64.tar.gz
+curl http://engimusing.github.io/install/org.eclipse.platform_4.4.0_157788997_linux_gtk_x86_64.tar.gz > ~/Downloads/
 mkdir -p ~/.eclipse
 tar -xf ~/Downloads/org.eclipse.platform_4.4.0_157788997_linux_gtk_x86_64.tar.gz -C ~/.eclipse/
 
