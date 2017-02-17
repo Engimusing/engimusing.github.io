@@ -32,45 +32,10 @@ import getopt
 import logging
 import logging.handlers
 
-LOG_FILENAME = "/var/log/serial2mqtt/serial2mqtt.log"
-LOG_LEVEL = logging.info
+#LOG_FILENAME = "/var/log/serial2mqtt/serial2mqtt.log"
+LOG_FILENAME = "serial2mqtt.log"
 
-# Configure logging to log to a file, making a new file at midnight and keeping the last 3 day's data
-# Give the logger a unique name (good practice)
-logger = logging.getLogger(__name__)
-
-# Set the log level to LOG_LEVEL
-logger.setLevel(LOG_LEVEL)
-
-# Make a handler that writes to a file, making a new file at midnight and keeping 3 backups
-handler = logging.handlers.TimedRotatingFileHandler(LOG_FILENAME, when="midnight", backupCount=3)
-
-# Format each log message like this
-formatter = logging.Formatter('%(asctime)s %(levelname)-8s %(message)s')
-
-# Attach the formatter to the handler
-handler.setFormatter(formatter)
-
-# Attach the handler to the logger
-logger.addHandler(handler)
-
-# Make a class we can use to capture stdout and sterr in the log
-class MyLogger(object):
-        def __init__(self, logger, level):
-                """Needs a logger and a logger level."""
-                self.logger = logger
-                self.level = level
-
-        def write(self, message):
-                # Only log if there is a message (not just a new line)
-                if message.rstrip() != "":
-                        self.logger.log(self.level, message.rstrip())
-
-# Replace stdout with logging to file at INFO level
-sys.stdout = MyLogger(logger, logging.INFO)
-
-# Replace stderr with logging to file at ERROR level
-sys.stderr = MyLogger(logger, logging.ERROR)
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
 try:
     import fcntl
@@ -107,7 +72,7 @@ def getSerialPort():
         try:
             fcntl.flock(s.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
         except IOError:
-            print 'Port {0} is busy'.format(serialPort)
+            logging.info( 'Port {0} is busy'.format(serialPort))
             sys.exit(-1)
         except:
             pass #windows doesn't have fcntl so ignore this
@@ -118,8 +83,8 @@ def getSerialPort():
             return s
             
     except serial.SerialException as e:
-        print 'Serial port failed to connect. Make sure no other applications are using the port and you have the proper permissions. Error message:'
-        print e
+        logging.info( 'Serial port failed to connect. Make sure no other applications are using the port and you have the proper permissions. Error message:')
+        logging.info( e)
         os._exit(-1)
 
 class toSerialThread(threading.Thread):
@@ -137,7 +102,7 @@ and sends them out the serial port.
             try:
                 # write command string to serial port
                 toSerialPortString = self.toSerialPort_q.get(True, 0.05)
-                print toSerialPortString
+                logging.info( toSerialPortString)
                 self.serialPort.write(toSerialPortString)
             except Queue.Empty:
                 continue
@@ -173,20 +138,20 @@ puts them in the fromSerialPort_q queue.
                 
                 if retries != initialRetries:
                     retries = initialRetries
-                    print 'Serial Port Reconnected.'
+                    logging.info( 'Serial Port Reconnected.')
                 
             
             except (serial.SerialException, OSError):
                 if retries == initialRetries:
-                    print 'Serial Port Disconnected'
+                    logging.info( 'Serial Port Disconnected')
                 else:
-                    print 'Serial Port Reconnect Failed'
+                    logging.info( 'Serial Port Reconnect Failed')
                 if retries == 0:
                     os._exit(-1)
                 retries -= 1
-                print 'Retrying Serial Port in 5 seconds'
+                logging.info( 'Retrying Serial Port in 5 seconds')
                 if retries > 0:
-                    print '{0} retries remaining.'.format(retries)
+                    logging.info( '{0} retries remaining.'.format(retries))
                 time.sleep(5)
                 try:
                     self.serialPort.close()
@@ -220,16 +185,16 @@ mqttc = mqtt.Client(client_id="subscriber")
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connectp(mqttp, userdata, rc):
-    print("mqttp connected with result code "+str(rc))
+    logging.info(("mqttp connected with result code "+str(rc)))
     mqttp.subscribe("home/habtutor/#")
 
 def on_disconnectp(mqttp, userdata, rc):
-    print("mqttp disconnected with result code "+str(rc))
+    logging.info(("mqttp disconnected with result code "+str(rc)))
  
 """ code for enabling logging if we want to att that in
 def on_log(mqttp, userdata, level, buf):
     if level == mqtt.MQTT_LOG_WARNING:
-        print buf
+        logging.info( buf)
         """
 
 class toMQTT(threading.Thread):
@@ -248,7 +213,7 @@ class toMQTT(threading.Thread):
             mqttp.username_pw_set(mqttUsername, mqttPassword)
             mqttp.connect(mqttHostAddress,mqttPort,60)
         except:
-            print 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort)
+            logging.info( 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort))
             os._exit(-1)
 
 
@@ -283,18 +248,18 @@ class toMQTT(threading.Thread):
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connectc(mqttc, userdata, rc):
-    print("mqttc connected with result code "+str(rc))
+    logging.info("mqttc connected with result code "+str(rc))
     #Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
     
     # mqttc.subscribe("some/topic")
     for s in subscriptions:
-        print "Subscribed to: " + s
+        logging.info( "Subscribed to: " + s)
         mqttc.subscribe(s)
     
 
 def on_disconnectc(mqttc, userdata, rc):
-    print("mqttc disconnected with result code "+str(rc))
+    logging.info("mqttc disconnected with result code "+str(rc))
     
     
 toSerialPort_q = Queue.Queue()
@@ -303,13 +268,13 @@ def on_message(mqttc, userdata, msg):
     toStr = "{\"TOP\":\"" + msg.topic + "\""
     if len(str(msg.payload)) > 0:
         toStr += ",\"PLD\":\"" + str(msg.payload) + "\"}"
-        print(toStr)
+        logging.info(toStr)
     else:
         toStr += "}"
     try:
         toSerialPort_q.put(toStr)
     except Queue.Full:
-        print "toSerialPort_q full"
+        logging.info( "toSerialPort_q full")
 
 def main(argv):
     global serialPort
@@ -322,12 +287,12 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "hp:a:m:u:w:r:", ["serialPort=","mqttHostAddress=", "mqttPort=", "mqttUsername=", "mqttPassword=", "retries="])
     except getopt.GetoptError:
-        print 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>'
+        logging.info( 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>')
         sys.exit(-1)
    
     for opt, arg in opts:        
         if opt == '-h':
-            print 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>'
+            logging.info( 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>')
             sys.exit(-1)
         elif opt in ("-p", "--serialPort"):
             serialPort = arg
@@ -343,7 +308,7 @@ def main(argv):
             try:
                 initialRetries = int(arg)
             except:
-                print 'retries argument not an integer'
+                logging.info( 'retries argument not an integer')
     
     
     # Create a single input and a single output queue for all threads.
@@ -359,7 +324,7 @@ def main(argv):
         mqttc.username_pw_set(mqttUsername, mqttPassword)
         mqttc.connect(mqttHostAddress,mqttPort,60)
     except:
-        print 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort)
+        logging.info( 'MQTT server failed to connect, make sure the MQTT server is running at {0}:{1}'.format(mqttHostAddress, mqttPort))
         os._exit(-1)
 
     toSer    = toSerialThread(toSerialPort_q=toSerialPort_q, serialPort=serialPort)
