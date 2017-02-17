@@ -32,8 +32,8 @@ import getopt
 import logging
 import logging.handlers
 
-#LOG_FILENAME = "/var/log/serial2mqtt/serial2mqtt.log"
-LOG_FILENAME = "serial2mqtt.log"
+LOG_FILENAME = "/var/log/serial2mqtt/serial2mqtt.log"
+#LOG_FILENAME = "serial2mqtt.log"
 
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
