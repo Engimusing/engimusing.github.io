@@ -88,8 +88,6 @@ ls -l /etc/openhab2
 echo "add user to openhab group"
 sudo usermod -a -G openhab $(whoami)
 sudo usermod -a -G dialout $(whoami)
-newgrp openhab
-newgrp dialout
 newgrp $(whoami)
 
 
