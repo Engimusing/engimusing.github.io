@@ -23,6 +23,7 @@ ChangesEnvironment=yes
 WizardImageFile=D:\emus2016\EngimusingInstaller\LargerIcon.bmp
 WizardSmallImageFile=D:\emus2016\EngimusingInstaller\logo.bmp
 WizardImageStretch=yes
+DisableProgramGroupPage=yes
 
 #include <idp.iss>
 
@@ -30,12 +31,12 @@ WizardImageStretch=yes
 #define DOWNLOAD_FILES
 
 
-
 [Components]
 Name: mosquitto;  Description: "mosquitto (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 600000; 
 Name: openhab; Description: "openHAB (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 58720256
 Name: smarthomedesigner;  Description: "SmartHome Designer (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 122667965 
-
+Name: serial2mqtt;  Description: "Serial2Mqtt"; Flags: disablenouninstallwarning; 
+ 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
@@ -43,12 +44,16 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: desktopicon; Description: "Create Engimusing Tools Folder on Desktop"; GroupDescription: "Decktop icons:"; 
 
 [Dirs]
-Name: "{commondesktop}\Engimusing Tools"; Tasks: desktopicon
+Name: "{commondesktop}\Engimusing Tools"; Tasks: desktopicon; Permissions: everyone-full
+Name: "{code:GetEmusToolsDir}\Serial2Mqtt"; Permissions: everyone-full
 
 [Icons]
-Name: "{commondesktop}\Engimusing Tools\Moquitto"; Filename: "{code:GetMosquittoDir}\Mosquitto.exe"; Parameters: "-c emus_mosquitto.conf"; WorkingDir: "{code:GetMosquittoDir}"; Tasks: desktopicon
-Name: "{commondesktop}\Engimusing Tools\OpenHab"; Filename: "{code:GetOpenHabDir}\Start.bat"; WorkingDir: "{code:GetOpenHabDir}"; Tasks: desktopicon
+Name: "{commondesktop}\Engimusing Tools\Moquitto"; Filename: "{code:GetMosquittoDir}\Mosquitto.exe"; Parameters: "-c emus_mosquitto.conf"; WorkingDir: "{code:GetMosquittoDir}"; Tasks: desktopicon; IconFilename: "{code:GetMosquittoDir}\MosquittoIcon.ico"
+Name: "{commondesktop}\Engimusing Tools\OpenHab"; Filename: "{code:GetOpenHabDir}\Start.bat"; WorkingDir: "{code:GetOpenHabDir}"; Tasks: desktopicon; IconFilename: "{code:GetOpenHabDir}\openHab.ico"
 Name: "{commondesktop}\Engimusing Tools\SmartHome"; Filename: "{code:GetSmartHomeDir}\SmartHome-Designer.exe"; WorkingDir: "{code:GetSmartHomeDir}"; Tasks: desktopicon
+Name: "{commondesktop}\Engimusing Tools\Serial2MqttSetup"; Filename: "{code:GetEmusToolsDir}\Serial2Mqtt\EFM_Serial2Mqtt_Setup.bat"; WorkingDir: "{code:GetEmusToolsDir}\Serial2Mqtt"; Tasks: desktopicon; IconFilename: "{code:GetEmusToolsDir}\favicon.ico"
+Name: "{commondesktop}\Engimusing Tools\Serial2MqttRun"; Filename: "{code:GetEmusToolsDir}\Serial2Mqtt\EFM_Serial2Mqtt_Saved.bat"; WorkingDir: "{code:GetEmusToolsDir}\Serial2Mqtt"; Tasks: desktopicon; IconFilename: "{code:GetEmusToolsDir}\favicon.ico"
+
 
 [Run]
 FileName: "explorer.exe"; Description: "Open Engimusing Tools Folder"; Parameters: "{commondesktop}\Engimusing Tools"; Tasks: desktopicon; Flags: postinstall
@@ -56,16 +61,21 @@ FileName: "explorer.exe"; Description: "Open Engimusing Tools Folder"; Parameter
 
 [Files]
 ;dummy files to run installers for the components
+Source: "favicon.ico"; DestDir: "{code:GetEmusToolsDir}"; 
+Source: "MosquittoIcon.ico"; DestDir: "{code:GetMosquittoDir}";
+Source: "openHab.ico"; DestDir: "{code:GetOpenHabDir}";
 Source: "favicon.ico"; DestDir: "{tmp}"; BeforeInstall: InstallMosquitto(); Components: mosquitto
 Source: "favicon.ico"; DestDir: "{tmp}"; BeforeInstall: InstallOpenHab(); Components: openhab
 Source: "favicon.ico"; DestDir: "{tmp}"; BeforeInstall: InstallEclipseSmartHome(); Components: smarthomedesigner
 
 ;OpenHab configuration files.
-Source: "openhabConfig\services\*"; DestDir: "{code:GetOpenHabDir}\conf\services"; Components: openhab
+Source: "openhabConfig\services\*"; DestDir: "{code:GetOpenHabDir}\conf\services"; Components: openhab; Permissions: everyone-full
 
 ;Mosquitto configuration files.
-Source: "mosquittoConfig\*"; DestDir: "{code:GetMosquittoDir}\";
+Source: "mosquittoConfig\*"; DestDir: "{code:GetMosquittoDir}\"; Permissions: everyone-full
 
+;Serial2MQTT files
+Source: "..\..\arduinoIDE\tools\EFM_Serial2Mqtt\windows\*"; DestDir: "{code:GetEmusToolsDir}\Serial2Mqtt\"; Flags: recursesubdirs; Components: serial2mqtt; Permissions: everyone-full
 
 [Messages]
 WizardSelectComponents=Components to Install
@@ -103,6 +113,13 @@ var
   SmartHomeIsDirEmpty: Boolean;
   SmartHomeOptionCheckBox: TNewCheckBox;
   
+  EmusToolsPage: TInputDirWizardPage;
+  EmusToolsUsePreviousInstall: Boolean;
+  EmusToolsInstalledAndFoundDirectory: Boolean;
+  EmusToolsInstallDirectory: String;
+  EmusToolsIsDirEmpty: Boolean;
+  EmusToolsOptionCheckBox: TNewCheckBox;
+
   JavaPage: TInputDirWizardPage;
   JavaHomeAlreadySetup: Boolean;
   JavaHomeSetup: Boolean;
@@ -137,8 +154,6 @@ end;
 procedure WizardForm_NextButton_OnClick(Sender: TObject);
 var 
   MosquittoPreviousDirEntry: String;
-  OpenHabPreviousDirEntry: String;
-  SmartHomePreviousDirEntry: String;
 begin
     MosquittoIsDirEmpty := False;
 
@@ -557,7 +572,118 @@ RegWriteStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Sessio
 UnzippingLabel.Visible := False;
 
 end;
-               
+
+
+
+
+function GetEmusToolsDir(Dummy: string): string;
+begin
+   Result := EmusToolsInstallDirectory;
+end;
+
+
+
+procedure onClickEmusTools(Sender: TObject);
+begin  
+    if(EmusToolsOptionCheckBox.Checked)then
+    begin
+      EmusToolsPage.PromptLabels[0].Caption := 'Currently Installed Engimusing Tools Directory:';
+    end
+    else
+    begin
+      EmusToolsPage.PromptLabels[0].Caption := 'Install Engimusing Tools Here:';
+    end
+end;
+
+procedure onActivateEmusToolsPage(Sender: TWizardPage);
+begin
+   EmusToolsOptionCheckBox.Visible := true;
+   EmusToolsOptionCheckBox.Caption := 'Skip Install and Use Directory Above';
+   EmusToolsOptionCheckBox.OnClick := @onClickEmusTools;
+end;
+
+function onBackEmusToolsPage(Sender: TWizardPage): Boolean;
+begin
+   EmusToolsOptionCheckBox.Visible := false;
+   Result := True;
+end;
+
+function onNextEmusToolsPage(Sender: TWizardPage): Boolean;
+begin
+  EmusToolsUsePreviousInstall := False;
+  EmusToolsInstallDirectory := '';
+  if(EmusToolsOptionCheckBox.Checked and not FileExists(EmusToolsPage.Values[0] + '\Serial2Mqtt\Setial2Mqtt.exe'))then
+  begin
+      Result := False;
+      if(EmusToolsIsDirEmpty) then
+      begin 
+        EmusToolsPage.Values[0] := '';
+      end
+      MsgBox('Specified folder is not a valid Engimusing Tools installation.' + #13'Please specify valid Engimusing Tools install or uncheck checkbox.' , mbError, MB_OK);
+  end
+  else
+  begin  
+    
+    if(EmusToolsOptionCheckBox.Checked)then
+    begin
+      WizardForm.ComponentsList.ItemEnabled[3] := false;
+      WizardForm.ComponentsList.Checked[3] := false;
+      EmusToolsUsePreviousInstall := True;
+      EmusToolsInstallDirectory := EmusToolsPage.Values[0];
+    end
+    else
+    begin
+      WizardForm.ComponentsList.ItemEnabled[3] := false;
+      WizardForm.ComponentsList.Checked[3] := true;
+      EmusToolsInstallDirectory := EmusToolsPage.Values[0];
+    end
+    EmusToolsOptionCheckBox.Visible := false;
+    EmusToolsOptionCheckBox.OnClick := nil;
+    Result := True;
+  end; 
+end;
+
+
+procedure BuildEmusToolsSetupPage();
+var
+  ErrorCode: Integer;
+  VersionString: TArrayOfString; 
+  SubCaptionString: String;
+  EmusToolsDir: String;
+begin
+      if(FileExists(ExpandConstant('{%EMUS_EMUSTOOLS_DIR}\\Serial2Mqtt\Setial2Mqtt.exe'))) then
+      begin
+         EmusToolsDir := ExpandConstant('{%EMUS_EMUSTOOLS_DIR}');
+         SubCaptionString := 'Found Engimusing Tools Installation Here:'#13 + ExpandConstant('{%EMUS_EMUSTOOLS_DIR}') + #13'Check box to use this installation otherwise provide path to install version 1.0.'#13;
+         EmusToolsOptionCheckBox.Checked := True;
+      end
+      else 
+      begin
+          SubCaptionString := 'No Engimusing Tools Installation found.'#13 + 'Specify previous Engimusing Tools installation directory or path to install version 1.0.'#13#13;
+          EmusToolsOptionCheckBox.Checked := False;
+          EmusToolsDir := ExpandConstant('{pf}\EngimusingTools');
+      end;
+
+      EmusToolsPage := CreateInputDirPage(OpenHabPage.ID,
+          'Engimusing Tools Installation', '',
+          SubCaptionString,
+          False, '');
+      if(EmusToolsOptionCheckBox.Checked)then
+      begin
+        EmusToolsPage.Add('Currently Installed Engimusing Tools Directory:');
+      end
+      else
+      begin
+        EmusToolsPage.Add('Install Engimusing Tools Here:');
+      end
+      EmusToolsPage.Values[0] := EmusToolsDir;
+      EmusToolsPage.OnActivate := @onActivateEmusToolsPage;
+      EmusToolsPage.OnNextButtonClick := @onNextEmusToolsPage;
+      EmusToolsPage.OnBackButtonClick := @onBackEmusToolsPage;
+
+      EmusToolsInstalledAndFoundDirectory := False;
+end;
+        
 
 procedure onClickJava(Sender: TObject);
 begin  
@@ -745,6 +871,15 @@ begin
     SmartHomeOptionCheckBox.Visible := False;
 
 
+    EmusToolsOptionCheckBox := TNewCheckBox.Create(WizardForm);
+    EmusToolsOptionCheckBox.Parent := WizardForm.MainPanel.Parent;
+    EmusToolsOptionCheckBox.Left :=59;
+    EmusToolsOptionCheckBox.Height := EmusToolsOptionCheckBox.Height + 3;
+    EmusToolsOptionCheckBox.Width := EmusToolsOptionCheckBox.Width + 300;
+    EmusToolsOptionCheckBox.Top := WizardForm.MainPanel.Top +
+      WizardForm.MainPanel.Height + 170;
+    EmusToolsOptionCheckBox.Visible := False;
+
     // override wizard NextButton click to work around Directory Validaiton.
     Old_WizardForm_NextButton_OnClick := WizardForm.NextButton.OnClick;
     WizardForm.NextButton.OnClick := @WizardForm_NextButton_OnClick;
@@ -765,6 +900,7 @@ begin
     BuildMosquittoSetupPage();
     BuildOpenHabSetupPage();
     BuildSmartHomeSetupPage();
+    BuildEmusToolsSetupPage();
 end;
 
 
