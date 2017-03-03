@@ -55,7 +55,7 @@ CreateAppDir=no
 Name: mosquitto;  Description: "mosquitto (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 600000; 
 Name: openhab; Description: "openHAB (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 58720256
 Name: smarthomedesigner;  Description: "SmartHome Designer (Download Required)"; Flags: disablenouninstallwarning; ExtraDiskSpaceRequired: 122667965 
-Name: serial2mqtt;  Description: "Serial2Mqtt"; Flags: disablenouninstallwarning; 
+Name: serial2mqtt;  Description: "Engimusing Tools"; Flags: disablenouninstallwarning; 
  
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -232,12 +232,15 @@ begin
 
 end;
 
+//Event for checkbox on mosquitto page
+// sets up the enable state for the components based on the checkbox
 procedure onClickMosquitto(Sender: TObject);
 begin
       MosquittoPage.Edits[0].Enabled := MosquittoOptionCheckBox.Checked;
       MosquittoPage.Buttons[0].Enabled := MosquittoOptionCheckBox.Checked;
 end;
 
+//setup the initial state for the mosquitto page
 procedure onActivateMosquittoPage(Sender: TWizardPage);
 begin
    MosquittoOptionCheckBox.Visible := true;
@@ -245,12 +248,15 @@ begin
    MosquittoOptionCheckBox.OnClick := @onClickMosquitto;
 end;
 
+//hide the mosquitto checkbox if we go back
 function onBackMosquittoPage(Sender: TWizardPage): Boolean;
 begin
    MosquittoOptionCheckBox.Visible := false;
    Result := True;
 end;
 
+//hide the mosquitto checkbox if we go forward 
+// and validate the Mosquitto installation directory
 function onNextMosquittoPage(Sender: TWizardPage): Boolean;
 begin
   MosquittoUsePreviousInstall := False;
@@ -285,6 +291,7 @@ begin
   end; 
 end;
 
+//setup the mosquitto build page which includes checking for a previously installed mosquitto installation
 procedure BuildMosquittoSetupPage();
 var
   ErrorCode: Integer;
@@ -330,6 +337,7 @@ begin
       MosquittoInstalledAndFoundDirectory := False;
 end;
 
+//install mosquitto by running the downloaded installer
 procedure InstallMosquitto();
 var
   ErrorCode: Integer;
@@ -349,7 +357,7 @@ UnzippingLabel.Visible := False;
 if not RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment',
      'MOSQUITTO_DIR', MosquittoInstallDirectory) then
 begin
-    // Failed to find MOQUITTO_DIR variable
+    // Failed to find MOSQUITTO_DIR variable
     MsgBox('Moquitto Install May Have Failed.'#13 + 'Unable to find MOQUITTO_DIR system variable.', mbInformation, MB_OK);
 end
 else
@@ -359,7 +367,8 @@ end;
 
 end;
 
-
+//event for openhab checkbox page
+// sets up the Directory selection text box label
 procedure onClickOpenHab(Sender: TObject);
 begin
    if(OpenHabOptionCheckBox.Checked)then
@@ -372,6 +381,7 @@ begin
     end
 end;
 
+//initial setup of open hab page
 procedure onActivateOpenHabPage(Sender: TWizardPage);
 begin
    OpenHabOptionCheckBox.Visible := true;
@@ -379,12 +389,14 @@ begin
    OpenHabOptionCheckBox.OnClick := @onClickOpenHab;
 end;
 
+//hide the checkbox if we go back
 function onBackOpenHabPage(Sender: TWizardPage): Boolean;
 begin
    OpenHabOptionCheckBox.Visible := false;
    Result := True;
 end;
 
+//validate the results of the openHab page
 function onNextOpenHabPage(Sender: TWizardPage): Boolean;
 begin
   OpenHabUsePreviousInstall := False;
@@ -420,7 +432,7 @@ begin
   end; 
 end;
 
-
+//check for a previous install of openHAB and create the page accordingly
 procedure BuildOpenHabSetupPage();
 var
   ErrorCode: Integer;
@@ -471,6 +483,7 @@ begin
 end;
 
 
+//install openhab by unzipping the downloaded zip file
 procedure InstallOpenHAB();
 begin
 UnzippingLabel.Visible := True;
@@ -487,6 +500,7 @@ UnzippingLabel.Caption := 'Unzipping openhab-2.0.0.zip into:'#13 + OpenHabInstal
 UnzippingLabel.Visible := False;     
 end;
 
+//functions for getting the final values for the install directories
 function GetOpenHabDir(Dummy: string): string;
 begin
    Result := OpenHabInstallDirectory;
@@ -503,7 +517,7 @@ begin
 end;
 
 
-
+//setup the caption based on the checkbox value
 procedure onClickSmartHome(Sender: TObject);
 begin  
     if(SmartHomeOptionCheckBox.Checked)then
@@ -516,6 +530,7 @@ begin
     end
 end;
 
+//intial page setup
 procedure onActivateSmartHomePage(Sender: TWizardPage);
 begin
    SmartHomeOptionCheckBox.Visible := true;
@@ -523,12 +538,14 @@ begin
    SmartHomeOptionCheckBox.OnClick := @onClickSmartHome;
 end;
 
+//hide the checkbox on back
 function onBackSmartHomePage(Sender: TWizardPage): Boolean;
 begin
    SmartHomeOptionCheckBox.Visible := false;
    Result := True;
 end;
 
+//validate the results of the page
 function onNextSmartHomePage(Sender: TWizardPage): Boolean;
 begin
   SmartHomeUsePreviousInstall := False;
@@ -565,6 +582,7 @@ begin
 end;
 
 
+//find the smart home install and build the page based on what we find.
 procedure BuildSmartHomeSetupPage();
 var
   ErrorCode: Integer;
@@ -606,6 +624,7 @@ begin
 end;
 
 
+//install smart home by unzipping the downloaded zip file
 procedure InstallEclipseSmartHome();
 begin
 UnzippingLabel.Visible := True;
@@ -624,14 +643,14 @@ end;
 
 
 
-
+//get the final emus tools directory
 function GetEmusToolsDir(Dummy: string): string;
 begin
    Result := EmusToolsInstallDirectory;
 end;
 
 
-
+//change the caption based on the checkbox value
 procedure onClickEmusTools(Sender: TObject);
 begin  
     if(EmusToolsOptionCheckBox.Checked)then
@@ -644,6 +663,7 @@ begin
     end
 end;
 
+//initial page setup
 procedure onActivateEmusToolsPage(Sender: TWizardPage);
 begin
    EmusToolsOptionCheckBox.Visible := true;
@@ -651,12 +671,14 @@ begin
    EmusToolsOptionCheckBox.OnClick := @onClickEmusTools;
 end;
 
+//hide the checkbox on back
 function onBackEmusToolsPage(Sender: TWizardPage): Boolean;
 begin
    EmusToolsOptionCheckBox.Visible := false;
    Result := True;
 end;
 
+//validate the page result before moving on
 function onNextEmusToolsPage(Sender: TWizardPage): Boolean;
 begin
   EmusToolsUsePreviousInstall := False;
@@ -692,7 +714,7 @@ begin
   end; 
 end;
 
-
+//find previous enigmusing tools install and build page based on what we find.
 procedure BuildEmusToolsSetupPage();
 var
   ErrorCode: Integer;
@@ -733,6 +755,7 @@ begin
       EmusToolsInstalledAndFoundDirectory := False;
 end;
  
+//update the environment variables based on the setup install directories
 procedure updateEnvironmentVars();
 begin
 
@@ -755,13 +778,14 @@ begin
 
 end;
       
-
+//enable the directory picker based on the checkbox
 procedure onClickJava(Sender: TObject);
 begin  
   JavaPage.Edits[0].Enabled := JavaOptionCheckBox.Checked;
   JavaPage.Buttons[0].Enabled := JavaOptionCheckBox.Checked;
 end;
 
+//initial page setup
 procedure onActivateJavaPage(Sender: TWizardPage);
 begin
    JavaOptionCheckBox.Visible := true;
@@ -769,12 +793,14 @@ begin
    JavaOptionCheckBox.OnClick := @onClickJava;
 end;
 
+//hide the checkbox on back
 function onBackJavaPage(Sender: TWizardPage): Boolean;
 begin
    JavaOptionCheckBox.Visible := false;
    Result := True;
 end;
 
+//validate the page on forward
 function onNextJavaPage(Sender: TWizardPage): Boolean;
 begin
 
@@ -798,7 +824,7 @@ begin
   end; 
 end;
 
-
+//build the page based on if we found a valid JAVA_HOME or not
 procedure BuildJavaCheckPage();
 var
   ErrorCode: Integer;
@@ -832,6 +858,7 @@ begin
 
 end;
 
+//check to see if we should skip the JAVA page
 function ShouldSkipPage(PageID : Integer) : Boolean;
 begin
    WizardForm.WizardSmallBitmapImage.SendToBack();
@@ -857,7 +884,7 @@ begin
 
     BuildJavaCheckPage();
 
-    //Downloading file list
+    //setup download links and mirrors
 #ifdef DOWNLOAD_FILES
 #ifdef USE_TEMP_FOLDER    
     idpAddFileComp('http://mirrors.xmission.com/eclipse/mosquitto/binary/win32/mosquitto-1.4.10-install-win32.exe', ExpandConstant('{tmp}\mosquitto-1.4.10-install-win32.exe'),  'mosquitto');
@@ -887,7 +914,6 @@ begin
 #endif
 
     //Create custom pages
-
     WelcomeMessagePage := CreateOutputMsgPage(wpWelcome,
     '', 'Welcome to the Engimusing MQTT and openHAB setup.',
 #ifndef USE_TEMP_FOLDER
@@ -913,7 +939,7 @@ begin
     UnzippingLabel.Width := WizardForm.ProgressGauge.Width;
     UnzippingLabel.Visible := False;
 
-    //create a checkbox as an extra input
+    //setup the custom input pages
     MosquittoOptionCheckBox := TNewCheckBox.Create(WizardForm);
     MosquittoOptionCheckBox.Parent := WizardForm.MainPanel.Parent;
     MosquittoOptionCheckBox.Left :=59;
@@ -941,7 +967,6 @@ begin
       WizardForm.MainPanel.Height + 170;
     SmartHomeOptionCheckBox.Visible := False;
 
-
     EmusToolsOptionCheckBox := TNewCheckBox.Create(WizardForm);
     EmusToolsOptionCheckBox.Parent := WizardForm.MainPanel.Parent;
     EmusToolsOptionCheckBox.Left :=59;
@@ -955,6 +980,7 @@ begin
     Old_WizardForm_NextButton_OnClick := WizardForm.NextButton.OnClick;
     WizardForm.NextButton.OnClick := @WizardForm_NextButton_OnClick;
 
+    //minor changes to the Wizard's components to work correctly for our images and setup
     WizardForm.TypesCombo.Visible := False;
 
     WizardForm.WizardSmallBitmapImage.Width := 162;
