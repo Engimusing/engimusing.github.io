@@ -10,7 +10,7 @@
 	"platforms": [{
 	    "name": "Engimusing ARM EFM32 Boards",
 	    "architecture": "efm32",
-	    "version": "1.0.0",
+	    "version": "1.0.1",
 	    "category": "Contributed",
 	    "url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.1.tar.bz2",
 	    "archiveFileName": "efm32-1.0.1.tar.bz2",
