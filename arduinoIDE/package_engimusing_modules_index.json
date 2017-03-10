@@ -12,10 +12,10 @@
 	    "architecture": "efm32",
 	    "version": "1.0.0",
 	    "category": "Contributed",
-	    "url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.0.tar.bz2",
-	    "archiveFileName": "efm32-1.0.0.tar.bz2",
-	    "checksum": "SHA-256:7eee1106775bce3000490af0ab76105e0b2085ccacf058ff40095358d3ff8d03",
-	    "size": "1244418",
+	    "url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.1.tar.bz2",
+	    "archiveFileName": "efm32-1.0.1.tar.bz2",
+	    "checksum": "SHA-256:829a2ce6077b8b1dd4b32b1e8e47cb8a059c4b403f9744d78cc8db57d3476f9d",
+	    "size": "1263371",
 	    "help": {
 		"online": "http://www.engimusing.com"
 	    },
