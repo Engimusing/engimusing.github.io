@@ -20,13 +20,7 @@
 		"online": "http://www.engimusing.com"
 	    },
 	    "boards": [{
-		"name": "EFM32ZGUSB"
-		"name": "EFM32ZG108"
-		"name": "EFM32ZG222"
-		"name": "EFM32TG110"
-		"name": "EFM32G232"
-		"name": "EFM32WG840"
-		"name": "EFM32WG842"
+		"name": "EFM32ZGUSB,EFM32ZG108,EFM32ZG222,EFM32TG110,EFM32G232,EFM32WG840,EFM32WG842"
 	    }],
 	    "toolsDependencies": [{
 		"packager": "arduino",
