@@ -19,7 +19,7 @@
 	    "help": {
 		"online": "http://www.engimusing.com"
 	    },
-	    "boards": [{
+	    "boards": [
 		{"name": "EFM32ZGUSB"},
 		{"name": "EFM32ZG108"},
 		{"name": "EFM32ZG222"},
@@ -27,7 +27,7 @@
 		{"name": "EFM32G232"},
 		{"name": "EFM32WG840"},
 		{"name": "EFM32WG842"}
-	    }],
+	    ],
 	    "toolsDependencies": [{
 		"packager": "arduino",
 		"name": "arm-none-eabi-gcc",
