@@ -14,8 +14,8 @@
 	    "category": "Contributed",
 	    "url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.1.tar.bz2",
 	    "archiveFileName": "efm32-1.0.1.tar.bz2",
-	    "checksum": "SHA-256:1025201574de31ed1edbbc9c91c128b3ba15e7180a409c333bb93a57e0991ab5",
-	    "size": "1268627",
+	    "checksum": "SHA-256:7b0505bac39cdbdbf4084a7eb5e8f523d9b6ff9d33d1efbbbec6903c8bf96d96",
+	    "size": "1258417",
 	    "help": {
 		"online": "http://www.engimusing.com"
 	    },
