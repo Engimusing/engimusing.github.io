@@ -71,7 +71,7 @@ Name: "{code:GetEmusToolsDir}\Serial2Mqtt"; Permissions: everyone-full
 
 [Icons]
 ;icons which will be created if the desktopicon task is enabled
-Name: "{commondesktop}\Engimusing Tools\Moquitto"; Filename: "{code:GetMosquittoDir}\Mosquitto.exe"; Parameters: "-c emus_mosquitto.conf"; WorkingDir: "{code:GetMosquittoDir}"; Tasks: desktopicon; IconFilename: "{code:GetMosquittoDir}\MosquittoIcon.ico"
+Name: "{commondesktop}\Engimusing Tools\Mosquitto"; Filename: "{code:GetMosquittoDir}\Mosquitto.exe"; Parameters: "-c emus_mosquitto.conf"; WorkingDir: "{code:GetMosquittoDir}"; Tasks: desktopicon; IconFilename: "{code:GetMosquittoDir}\MosquittoIcon.ico"
 Name: "{commondesktop}\Engimusing Tools\OpenHab"; Filename: "{code:GetOpenHabDir}\Start.bat"; WorkingDir: "{code:GetOpenHabDir}"; Tasks: desktopicon; IconFilename: "{code:GetOpenHabDir}\openHab.ico"
 Name: "{commondesktop}\Engimusing Tools\SmartHome"; Filename: "{code:GetSmartHomeDir}\SmartHome-Designer.exe"; WorkingDir: "{code:GetSmartHomeDir}"; Tasks: desktopicon
 Name: "{commondesktop}\Engimusing Tools\Serial2MqttSetup"; Filename: "{code:GetEmusToolsDir}\Serial2Mqtt\EFM_Serial2Mqtt_Setup.bat"; WorkingDir: "{code:GetEmusToolsDir}\Serial2Mqtt"; Tasks: desktopicon; IconFilename: "{code:GetEmusToolsDir}\favicon.ico"
