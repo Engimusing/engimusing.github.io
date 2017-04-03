@@ -5,7 +5,7 @@ from datetime import datetime
 import xml.etree.ElementTree as ET
 
 templateDir = './templates/'
-deviceConfig = './configruation/'
+deviceConfig = './configuration/'
 outputDir = './output/'
 
 PATH = os.path.dirname(os.path.abspath(__file__))     
