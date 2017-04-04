@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>HTU21D</DeviceType>
+  <DeviceDescription>humidity and temperature sensor</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/htu-3</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/htu21d-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>Wire0, 2</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire0, 10</DF11DeviceBeginParameters>
+  <SerialPrintout>
+  float hum = HTU21D.calcHumidity(HTU21D.readHumidity());
+  float temp = HTU21D.calcTemp(HTU21D.readTemp());
+  delay(1000);                       // wait for a second
+  Serial.print("temperature = ");
+  Serial.print(temp);
+  Serial.print("   humidity = ");
+  Serial.println(hum);</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("temperature = ");
+  Serial1.print(temp);
+  Serial1.print("   humidity = ");
+  Serial1.println(hum);</Serial1Printout>
+  
+</Replacements>

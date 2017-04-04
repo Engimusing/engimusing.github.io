@@ -1,15 +1,16 @@
- {% set DeviceType = replacements['DeviceType'] %}
- {% set DeviceDescription = replacements['DeviceDescription'] %}
- {% set RS232x2BoardType = replacements['RS232x2BoardType'] %}
- {% set DF11BoardType = replacements['DF11BoardType'] %}
- {% set DeviceURL = replacements['DeviceURL'] %}
- {% set DeviceAdditionalIncludes = replacements['DeviceAdditionalIncludes'] %}
- {% set RS232x2DeviceBeginParameters = replacements['RS232x2DeviceBeginParameters'] %} 
- {% set DF11DeviceBeginParameters = replacements['DF11DeviceBeginParameters'] %} 
- {% set SerialPrintout = replacements['SerialPrintout'] %}
- {% set Serial1Printout = replacements['Serial1Printout'] %}
- {% set DeviceBeginComment = replacements['DeviceBeginComment'] %}
-
+{% set DeviceType = replacements['DeviceType'] %}
+{% set DeviceDescription = replacements['DeviceDescription'] %}
+{% set RS232x2BoardType = replacements['RS232x2BoardType'] %}
+{% set DF11BoardType = replacements['DF11BoardType'] %}
+{% set RS232x2DeviceURL = replacements['RS232x2DeviceURL'] %}
+{% set DF11DeviceURL = replacements['DF11DeviceURL'] %}
+{% set DeviceAdditionalIncludes = replacements['DeviceAdditionalIncludes'] %}
+{% set RS232x2DeviceBeginParameters = replacements['RS232x2DeviceBeginParameters'] %} 
+{% set DF11DeviceBeginParameters = replacements['DF11DeviceBeginParameters'] %} 
+{% set SerialPrintout = replacements['SerialPrintout'] %}
+{% set Serial1Printout = replacements['Serial1Printout'] %}
+{% set DeviceBeginComment = replacements['DeviceBeginComment'] %}
+{% if replacements['GenerateDF11'] == '1' %}
 /*
   Copyright (c) 2016-{{ Year }} Engimusing LLC.  All right reserved.
   
@@ -27,9 +28,9 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/* Example for how to print out readings from a {{ DeviceType }}  DF11 board using the ZB USB Engimusing board
-   There are 2 devices on this board. An LED and a {{ DeviceType }} {{ DeviceDescription }}.
-   See {{ DeviceURL }} for more information about the board.
+/* Example for how to print out readings from the {{ DeviceType }}  DF11 board using the ZB USB Engimusing board
+    There are 2 devices on this board. An LED and a {{ DeviceType }} {{ DeviceDescription }}.
+    See {{ DF11DeviceURL }} for more information about the board.
 */
 
 #if !defined({{ DF11BoardType }})
@@ -72,3 +73,4 @@ void loop()
     on = (on) ? LOW : HIGH;  // on alternates between LOW and HIGH
   }
 }
+{% endif %}

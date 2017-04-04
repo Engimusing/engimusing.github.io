@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
   <DeviceType>TCS34725</DeviceType>
   <DeviceDescription>color sensor</DeviceDescription>
   <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
   <DF11BoardType>EFM32ZGUSB</DF11BoardType>
-  <DeviceURL>https://www.engimusing.com/products/tcs3472-1</DeviceURL>
-  <DeviceAdditionalIncludes>#include  &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/tcs3472-3</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/tcs3472-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
   <DeviceBeginComment></DeviceBeginComment>
   <RS232x2DeviceBeginParameters>Wire0, 7, TCS34725_INTEGRATIONTIME_700MS</RS232x2DeviceBeginParameters>
-  <DF11DeviceBeginParameters>Wire0, 5, TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X</DF11DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire0, 5, TCS34725_INTEGRATIONTIME_700MS</DF11DeviceBeginParameters>
   <SerialPrintout>
   uint16_t r = 0;
   uint16_t g = 0;

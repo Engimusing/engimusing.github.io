@@ -34,13 +34,18 @@ for filename in os.listdir(deviceConfig):
                 print templateFile
                 template = env.get_template(templateFile)
                 
-                outDir = outputDir + replacements['DeviceType'] + templateFile[0:-4] + '/'
-                outFile = outDir + replacements['DeviceType'] + templateFile
-                print(outFile)
-                if not os.path.exists(outputDir):
-                    os.mkdir(outputDir)
-                if not os.path.exists(outDir):
-                    os.mkdir(outDir)
-                with open(outFile, 'w') as f:
-                        html = template.render( replacements = replacements, Year = datetime.now().year  ).strip()
-                        f.write(html)
+                
+                generatedFile = template.render( replacements = replacements, Year = datetime.now().year  ).strip()
+                
+                if(generatedFile != ''):
+                    outDir = outputDir + replacements['DeviceType'] + templateFile[0:-4] + '/'
+                    outFile = outDir + replacements['DeviceType'] + templateFile
+                    print(outFile)
+                    if not os.path.exists(outputDir):
+                        os.mkdir(outputDir)
+                    if not os.path.exists(outDir):
+                        os.mkdir(outDir)
+                    
+                    with open(outFile, 'w') as f:
+                            html = template.render( replacements = replacements, Year = datetime.now().year  ).strip()
+                            f.write(html)

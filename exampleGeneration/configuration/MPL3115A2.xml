@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>MPL3115A2</DeviceType>
+  <DeviceDescription>temperature and altitude sensor</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/mql3-3</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/mpl3115a2-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>Wire0, 3</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire0, 5</DF11DeviceBeginParameters>
+  <SerialPrintout>
+  float pressue = MPL3115A2.readPressure();
+  float altitude = MPL3115A2.readAltitude();
+  float temp = MPL3115A2.readTemp();
+  Serial.print("Pressure = ");
+  Serial.print(pressue);
+  Serial.print(" Pa Altitude = ");
+  Serial.print(altitude);
+  Serial.print(" M temperature = ");
+  Serial.print(temp);
+  Serial.println(" C");</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("Pressure = ");
+  Serial1.print(pressue);
+  Serial1.print(" Pa Altitude = ");
+  Serial1.print(altitude);
+  Serial1.print(" M temperature = ");
+  Serial1.print(temp);
+  Serial1.println(" C");</Serial1Printout>
+  
+</Replacements>

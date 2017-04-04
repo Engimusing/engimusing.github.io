@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>TMP102</DeviceType>
+  <DeviceDescription>temperature sensor</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/tmp-3</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/tmp102-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>Wire0, -1, true</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire0, 5, true</DF11DeviceBeginParameters>
+  <SerialPrintout>
+  float temp = TMP102.temperature();
+  Serial.print("temperature = ");
+  Serial.println(temp);
+</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("temperature = ");
+  Serial1.println(temp);</Serial1Printout>
+  
+</Replacements>

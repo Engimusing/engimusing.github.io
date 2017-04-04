@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>0</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>MPU9150</DeviceType>
+  <DeviceDescription>9-axis Motion Tracker</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com</RS232x2DeviceURL>
+  <DF11DeviceURL></DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>Wire0, 3, 6</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters></DF11DeviceBeginParameters>
+  <SerialPrintout>
+  float temp;
+  MPU9150.getTemp(temp);
+  Serial.print("temperature = ");
+  Serial.print(temp);
+  Serial.println(" C");
+  
+  int cX;
+  int cY;
+  int cZ;
+  MPU9150.getCompassData(cX,cY,cZ);
+  Serial.print("Compass = (");
+  Serial.print(cX);
+  Serial.print(",");
+  Serial.print(cY);
+  Serial.print(",");
+  Serial.print(cZ);
+  Serial.println(")");
+  
+  int gX;
+  int gY;
+  int gZ;
+  MPU9150.getGyroData(gX,gY,gZ);
+  Serial.print("Gyro = (");
+  Serial.print(gX);
+  Serial.print(",");
+  Serial.print(gY);
+  Serial.print(",");
+  Serial.print(gZ);
+  Serial.println(")");
+  
+  int aX;
+  int aY;
+  int aZ;
+  
+  MPU9150.getAccelData(aX,aY,aZ);
+  Serial.print("Acceleration = (");
+  Serial.print(aX);
+  Serial.print(",");
+  Serial.print(aY);
+  Serial.print(",");
+  Serial.print(aZ);
+  Serial.println(")");</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("temperature = ");
+  Serial1.print(temp);
+  Serial1.println(" C");
+  
+  Serial1.print("Compass = (");
+  Serial1.print(cX);
+  Serial1.print(",");
+  Serial1.print(cY);
+  Serial1.print(",");
+  Serial1.print(cZ);
+  Serial1.println(")");
+  
+  Serial1.print("Gyro = (");
+  Serial1.print(gX);
+  Serial1.print(",");
+  Serial1.print(gY);
+  Serial1.print(",");
+  Serial1.print(gZ);
+  Serial1.println(")");
+
+  Serial1.print("Acceleration = (");
+  Serial1.print(aX);
+  Serial1.print(",");
+  Serial1.print(aY);
+  Serial1.print(",");
+  Serial1.print(aZ);
+  Serial1.println(")");</Serial1Printout>
+  
+</Replacements>

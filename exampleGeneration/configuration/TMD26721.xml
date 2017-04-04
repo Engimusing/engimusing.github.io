@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>0</GenerateRS232x2>
+  <DeviceType>TMD26721</DeviceType>
+  <DeviceDescription>proximity sensor</DeviceDescription>
+  <RS232x2BoardType></RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL></RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/tmd2771-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment>
+  //Initialize the TMD26721 which will report the proximity every 10 seconds
+  // The 4 parameter is the number of pulses. It can be anything between 0 and 255.
+  // If it is 0 then it will act more like a light detector than a proximity detector.
+  </DeviceBeginComment>
+  <RS232x2DeviceBeginParameters></RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire, 5, 4</DF11DeviceBeginParameters>
+  <SerialPrintout>
+  uint32_t proximity = TMD26721.proximityData();
+  Serial.print("proximity = ");
+  Serial.println(proximity);</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("proximity = ");
+  Serial1.println(proximity);</Serial1Printout>
+  
+</Replacements>

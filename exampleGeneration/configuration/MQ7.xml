@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>0</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>MQ7</DeviceType>
+  <DeviceDescription>CO detector</DeviceDescription>
+  <RS232x2BoardType>EFM32TG110</RS232x2BoardType>
+  <DF11BoardType></DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/gas-4</RS232x2DeviceURL>
+  <DF11DeviceURL></DF11DeviceURL>
+  <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
+  <DeviceBeginComment>
+  //Initialize the MQ7 CO Sensor
+  //Pins:
+  // PWM Controller - 7
+  // Analog Sensor Input - A0
+  </DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>7, A0</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters></DF11DeviceBeginParameters>
+  <SerialPrintout>
+  uint32_t alertValue = MQ7.currentAlertValue();
+  const char * state = MQ7.currentAlertText();
+  Serial.print("value = ");
+  Serial.print(alertValue);
+  Serial.print(" state = ");
+  Serial.println(state);</SerialPrintout>
+  <Serial1Printout>
+  Serial1.print("value = ");
+  Serial1.print(alertValue);
+  Serial1.print(" state = ");
+  Serial1.println(state);</Serial1Printout>
+  
+</Replacements>
