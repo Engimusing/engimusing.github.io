@@ -60,16 +60,16 @@ void loop()
 {
 
   static int on = HIGH;
-  
+
   {{ DeviceType }}.update();
-  
+
   if(millis() - lastMillis > printDelay)
   {
     lastMillis = millis();
-    
+
     digitalWrite(LED_BUILTIN, on);   // toggle the LED (HIGH is the voltage level)
     {{ SerialPrintout }}
-    
+
     on = (on) ? LOW : HIGH;  // on alternates between LOW and HIGH
   }
 }

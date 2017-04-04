@@ -13,12 +13,11 @@
   <RS232x2DeviceBeginParameters>Wire0, -1, true</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>Wire0, 5, true</DF11DeviceBeginParameters>
   <SerialPrintout>
-  float temp = TMP102.temperature();
-  Serial.print("temperature = ");
-  Serial.println(temp);
-</SerialPrintout>
+    float temp = TMP102.temperature();
+    Serial.print("temperature = ");
+    Serial.println(temp);</SerialPrintout>
   <Serial1Printout>
-  Serial1.print("temperature = ");
-  Serial1.println(temp);</Serial1Printout>
+    Serial1.print("temperature = ");
+    Serial1.println(temp);</Serial1Printout>
   
 </Replacements>

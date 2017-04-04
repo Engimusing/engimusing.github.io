@@ -17,11 +17,11 @@
   <RS232x2DeviceBeginParameters></RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>Wire, 5, 4</DF11DeviceBeginParameters>
   <SerialPrintout>
-  uint32_t proximity = TMD26721.proximityData();
-  Serial.print("proximity = ");
-  Serial.println(proximity);</SerialPrintout>
+    uint32_t proximity = TMD26721.proximityData();
+    Serial.print("proximity = ");
+    Serial.println(proximity);</SerialPrintout>
   <Serial1Printout>
-  Serial1.print("proximity = ");
-  Serial1.println(proximity);</Serial1Printout>
+    Serial1.print("proximity = ");
+    Serial1.println(proximity);</Serial1Printout>
   
 </Replacements>

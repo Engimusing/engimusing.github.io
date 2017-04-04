@@ -79,7 +79,8 @@ void setup()
   {{ DeviceType }}MqttMod.begin(HUB, {{ DeviceType }}, "{{ DF11BoardType }}/BOARD/{{ DeviceType }}", 10000);
 }
 
-void loop() {
+void loop() 
+{
 
   //Update the MQTT communication so it
   // can send statuses and recieve requests

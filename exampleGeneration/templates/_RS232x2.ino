@@ -44,15 +44,15 @@
 
 void setup()
 {
-Serial.begin(115200);
-Serial1.begin(115200);
+  Serial.begin(115200);
+  Serial1.begin(115200);
 
-pinMode(LED_BUILTIN, OUTPUT);
-Serial.println("Simple {{ DeviceType }} example 0");
-Serial.println("Simple {{ DeviceType }} example 1");
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.println("Simple {{ DeviceType }} example 0");
+  Serial.println("Simple {{ DeviceType }} example 1");
 
-{{ DeviceBeginComment }}
-{{ DeviceType }}.begin({{ RS232x2DeviceBeginParameters }});
+  {{ DeviceBeginComment }}
+  {{ DeviceType }}.begin({{ RS232x2DeviceBeginParameters }});
 }
 
 int lastMillis = 0; // store the last time the current was printed.
@@ -61,19 +61,19 @@ int printDelay = 1000; //print every second.
 void loop()
 {
 
-static int on = HIGH;
+  static int on = HIGH;
 
-{{ DeviceType }}.update();
+  {{ DeviceType }}.update();
 
-if(millis() - lastMillis > printDelay)
-{
-lastMillis = millis();
+  if(millis() - lastMillis > printDelay)
+  {
+    lastMillis = millis();
 
-digitalWrite(LED_BUILTIN, on); // toggle the LED (HIGH is the voltage level)
-{{ SerialPrintout }}
-{{ Serial1Printout }}
+    digitalWrite(LED_BUILTIN, on); // toggle the LED (HIGH is the voltage level)
+    {{ SerialPrintout }}
+    {{ Serial1Printout }}
 
-on = (on) ? LOW : HIGH; // on alternates between LOW and HIGH
-}
+    on = (on) ? LOW : HIGH; // on alternates between LOW and HIGH
+  }
 }
 {% endif %}

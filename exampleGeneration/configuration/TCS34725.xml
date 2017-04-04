@@ -13,39 +13,39 @@
   <RS232x2DeviceBeginParameters>Wire0, 7, TCS34725_INTEGRATIONTIME_700MS</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>Wire0, 5, TCS34725_INTEGRATIONTIME_700MS</DF11DeviceBeginParameters>
   <SerialPrintout>
-  uint16_t r = 0;
-  uint16_t g = 0;
-  uint16_t b = 0;
-  uint16_t c = 0;
-  TCS34725.sampleData();
-  TCS34725.getRawData(r,g,b,c);
-  float colorTemp = TCS34725.calculateColorTemperature(r,g,b);
-  float lux = TCS34725.calculateLux(r,g,b);
-    
-  Serial.print("red = ");
-  Serial.print(r);
-  Serial.print(" green = ");
-  Serial.print(g);
-  Serial.print(" blue = ");
-  Serial.print(b);
-  Serial.print(" clear = ");
-  Serial.println(c);
-  Serial.print(" color temperature = ");
-  Serial.print(colorTemp);
-  Serial.print(" luminance = ");
-  Serial.println(lux);</SerialPrintout>
+    uint16_t r = 0;
+    uint16_t g = 0;
+    uint16_t b = 0;
+    uint16_t c = 0;
+    TCS34725.sampleData();
+    TCS34725.getRawData(r,g,b,c);
+    float colorTemp = TCS34725.calculateColorTemperature(r,g,b);
+    float lux = TCS34725.calculateLux(r,g,b);
+
+    Serial.print("red = ");
+    Serial.print(r);
+    Serial.print(" green = ");
+    Serial.print(g);
+    Serial.print(" blue = ");
+    Serial.print(b);
+    Serial.print(" clear = ");
+    Serial.println(c);
+    Serial.print(" color temperature = ");
+    Serial.print(colorTemp);
+    Serial.print(" luminance = ");
+    Serial.println(lux);</SerialPrintout>
   <Serial1Printout>
-  Serial1.print("red = ");
-  Serial1.print(r);
-  Serial1.print(" green = ");
-  Serial1.print(g);
-  Serial1.print(" blue = ");
-  Serial1.print(b);
-  Serial1.print(" clear = ");
-  Serial1.println(c);
-  Serial1.print(" color temperature = ");
-  Serial1.print(colorTemp);
-  Serial1.print(" luminance = ");
-  Serial1.println(lux);</Serial1Printout>
+    Serial1.print("red = ");
+    Serial1.print(r);
+    Serial1.print(" green = ");
+    Serial1.print(g);
+    Serial1.print(" blue = ");
+    Serial1.print(b);
+    Serial1.print(" clear = ");
+    Serial1.println(c);
+    Serial1.print(" color temperature = ");
+    Serial1.print(colorTemp);
+    Serial1.print(" luminance = ");
+    Serial1.println(lux);</Serial1Printout>
   
 </Replacements>

@@ -18,16 +18,16 @@
   <RS232x2DeviceBeginParameters>7, A0</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters></DF11DeviceBeginParameters>
   <SerialPrintout>
-  uint32_t alertValue = MQ7.currentAlertValue();
-  const char * state = MQ7.currentAlertText();
-  Serial.print("value = ");
-  Serial.print(alertValue);
-  Serial.print(" state = ");
-  Serial.println(state);</SerialPrintout>
+    uint32_t alertValue = MQ7.currentAlertValue();
+    const char * state = MQ7.currentAlertText();
+    Serial.print("value = ");
+    Serial.print(alertValue);
+    Serial.print(" state = ");
+    Serial.println(state);</SerialPrintout>
   <Serial1Printout>
-  Serial1.print("value = ");
-  Serial1.print(alertValue);
-  Serial1.print(" state = ");
-  Serial1.println(state);</Serial1Printout>
+    Serial1.print("value = ");
+    Serial1.print(alertValue);
+    Serial1.print(" state = ");
+    Serial1.println(state);</Serial1Printout>
   
 </Replacements>

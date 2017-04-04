@@ -13,17 +13,17 @@
   <RS232x2DeviceBeginParameters>Wire0, 2</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>Wire0, 10</DF11DeviceBeginParameters>
   <SerialPrintout>
-  float hum = HTU21D.calcHumidity(HTU21D.readHumidity());
-  float temp = HTU21D.calcTemp(HTU21D.readTemp());
-  delay(1000);                       // wait for a second
-  Serial.print("temperature = ");
-  Serial.print(temp);
-  Serial.print("   humidity = ");
-  Serial.println(hum);</SerialPrintout>
+    float hum = HTU21D.calcHumidity(HTU21D.readHumidity());
+    float temp = HTU21D.calcTemp(HTU21D.readTemp());
+    delay(1000);                       // wait for a second
+    Serial.print("temperature = ");
+    Serial.print(temp);
+    Serial.print("   humidity = ");
+    Serial.println(hum);</SerialPrintout>
   <Serial1Printout>
-  Serial1.print("temperature = ");
-  Serial1.print(temp);
-  Serial1.print("   humidity = ");
-  Serial1.println(hum);</Serial1Printout>
+    Serial1.print("temperature = ");
+    Serial1.print(temp);
+    Serial1.print("   humidity = ");
+    Serial1.println(hum);</Serial1Printout>
   
 </Replacements>

@@ -13,14 +13,14 @@
   <RS232x2DeviceBeginParameters>Wire0, -1</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>Wire0, 10</DF11DeviceBeginParameters>
   <SerialPrintout>
-  float temp = MLX90614.temperature();
-  Serial.print("temperature = ");
-  Serial.print(temp);
-  Serial.println(" C");
+    float temp = MLX90614.temperature();
+    Serial.print("temperature = ");
+    Serial.print(temp);
+    Serial.println(" C");
   </SerialPrintout>
   <Serial1Printout>
-  Serial1.print("temperature = ");
-  Serial1.print(temp);
-  Serial1.println(" C");</Serial1Printout>
+    Serial1.print("temperature = ");
+    Serial1.print(temp);
+    Serial1.println(" C");</Serial1Printout>
   
 </Replacements>
