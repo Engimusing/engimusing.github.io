@@ -49,7 +49,7 @@ Serial1.begin(115200);
 
 pinMode(LED_BUILTIN, OUTPUT);
 Serial.println("Simple {{ DeviceType }} example 0");
-Serial.println("Simple {{ DeviceType }} example 1");
+Serial1.println("Simple {{ DeviceType }} example 1");
 
 {{ DeviceBeginComment }}
 {{ DeviceType }}.begin({{ RS232x2DeviceBeginParameters }});
