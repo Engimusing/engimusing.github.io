@@ -10,9 +10,9 @@
   <DF11DeviceURL>http://www.engimusing.com/products/ACS716-2</DF11DeviceURL>
   <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
   <DeviceBeginComment>
-    //Initialize the ACS716 which will report the current every 10 seconds
-    // The two parameters A1 are the power pin and power feedback pin which in this case are the same
-    // other implementations they may not be the same and can both be -1 which means neither is connected
+  //Initialize the ACS716 which will report the current every 10 seconds
+  // The two parameters A1 are the power pin and power feedback pin which in this case are the same
+  // other implementations they may not be the same and can both be -1 which means neither is connected
   // The A0 parameter is the ADC pin that is connected to the ACS716 output pin.</DeviceBeginComment>
   <RS232x2DeviceBeginParameters>ACS716Device::ACS716_6BB, 8, 0, 11, 100</RS232x2DeviceBeginParameters>
   <DF11DeviceBeginParameters>ACS716Device::ACS716_6BB, A1, A1, A0, 100</DF11DeviceBeginParameters>
