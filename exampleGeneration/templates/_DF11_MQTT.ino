@@ -1,15 +1,4 @@
-{% set DeviceType = replacements['DeviceType'] %}
-{% set DeviceDescription = replacements['DeviceDescription'] %}
-{% set RS232x2BoardType = replacements['RS232x2BoardType'] %}
-{% set DF11BoardType = replacements['DF11BoardType'] %}
-{% set RS232x2DeviceURL = replacements['RS232x2DeviceURL'] %}
-{% set DF11DeviceURL = replacements['DF11DeviceURL'] %}
-{% set DeviceAdditionalIncludes = replacements['DeviceAdditionalIncludes'] %}
-{% set RS232x2DeviceBeginParameters = replacements['RS232x2DeviceBeginParameters'] %} 
-{% set DF11DeviceBeginParameters = replacements['DF11DeviceBeginParameters'] %} 
-{% set SerialPrintout = replacements['SerialPrintout'] %}
-{% set Serial1Printout = replacements['Serial1Printout'] %}
-{% set DeviceBeginComment = replacements['DeviceBeginComment'] %}
+{% import 'setupVariables.txt' as Strs with context %}
 {% if replacements['GenerateDF11'] == '1' %}
 /*
   Copyright (c) 2016-{{ Year }} Engimusing LLC.  All right reserved.
@@ -28,13 +17,13 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/* Example for how to setup the MQTT client for the {{ DeviceType }} DF11 board using the {{ DF11BoardType }} Engimusing board
-    There are 2 devices on this board. An LED and a {{ DeviceType }} {{ DeviceDescription }}.
-    See {{ DF11DeviceURL }} for more information about the board.
+/* Example for how to setup the MQTT client for the {{ Strs.DeviceType }} DF11 board using the {{ Strs.DF11BoardType }} Engimusing board
+    There are 2 devices on this board. An LED and a {{ Strs.DeviceType }} {{ Strs.DeviceDescription }}.
+    See {{ Strs.DF11DeviceURL }} for more information about the board.
 */
 
-#if !defined({{ DF11BoardType }})
-#error Incorrect Board Selected! Please select Engimusing {{ DF11BoardType }} from the Tools->Board: menu.
+#if !defined({{ Strs.DF11BoardType }})
+#error Incorrect Board Selected! Please select Engimusing {{ Strs.DF11BoardType }} from the Tools->Board: menu.
 #endif
 
 //Include the MqttModule to get the MQTT client classes
@@ -42,16 +31,16 @@
 #include <MqttPort.h>
 #include <MqttModule.h>
 
-#include <{{ DeviceType }}Device.h>
-{{ DeviceAdditionalIncludes }}
+#include <{{ Strs.DeviceType }}Device.h>
+{{ Strs.DeviceAdditionalIncludes }}
 
 /*
-  {{ DF11BoardType }} Commands:
-  {"TOP":"{{ DF11BoardType }}/BOARD/LED/CTL","PLD":"ON"}
-  {"TOP":"{{ DF11BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
-  {"TOP":"{{ DF11BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
+  {{ Strs.DF11BoardType }} Commands:
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"ON"}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
 
-  {"TOP":"{{ DF11BoardType }}/BOARD/{{ DeviceType }}/","PLD":"STATUS"}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}/","PLD":"STATUS"}
 */
 
 MqttHub HUB;
@@ -63,8 +52,8 @@ MqttSerialPort serialPort;
 // whenever HUB.update() is called.
 OnOffCtlModule LEDCtrl;
 
-{{ DeviceType }}Device {{ DeviceType }};
-SimpleMqttModule {{ DeviceType }}MqttMod;
+{{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
+SimpleMqttModule {{ Strs.DeviceType }}MqttMod;
 
 void setup() 
 {
@@ -72,11 +61,11 @@ void setup()
 
   //Initialize the on off control to connect it to
   // the LED that is on the board
-  LEDCtrl.begin(HUB, 13, "{{ DF11BoardType }}/BOARD/LED", HIGH);
+  LEDCtrl.begin(HUB, 13, "{{ Strs.DF11BoardType }}/BOARD/LED", HIGH);
 
-  {{ DeviceBeginComment }}
-  {{ DeviceType }}.begin({{ DF11DeviceBeginParameters }});
-  {{ DeviceType }}MqttMod.begin(HUB, {{ DeviceType }}, "{{ DF11BoardType }}/BOARD/{{ DeviceType }}", 10000);
+  {{ Strs.DeviceBeginComment }}
+  {{ Strs.DeviceType }}.begin({{ Strs.DF11DeviceBeginParameters }});
+  {{ Strs.DeviceType }}MqttMod.begin(HUB, {{ Strs.DeviceType }}, "{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}", 10000);
 }
 
 void loop() 

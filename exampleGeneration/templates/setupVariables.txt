@@ -1,0 +1,12 @@
+{% set DeviceType = replacements['DeviceType'] %}
+{% set DeviceDescription = replacements['DeviceDescription'] %}
+{% set RS232x2BoardType = replacements['RS232x2BoardType'] %}
+{% set DF11BoardType = replacements['DF11BoardType'] %}
+{% set RS232x2DeviceURL = replacements['RS232x2DeviceURL'] %}
+{% set DF11DeviceURL = replacements['DF11DeviceURL'] %}
+{% set DeviceAdditionalIncludes = replacements['DeviceAdditionalIncludes'] %}
+{% set RS232x2DeviceBeginParameters = replacements['RS232x2DeviceBeginParameters'] %} 
+{% set DF11DeviceBeginParameters = replacements['DF11DeviceBeginParameters'] %} 
+{% set SerialPrintout = replacements['SerialPrintout'] %}
+{% set Serial1Printout = replacements['Serial1Printout'] %}
+{% set DeviceBeginComment = replacements['DeviceBeginComment'] %}
