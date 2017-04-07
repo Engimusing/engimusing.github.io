@@ -1,4 +1,8 @@
+{% set DeviceCount = replacements['DeviceCount'] %}
+{% set DeviceObjName = replacements['DeviceObjName'] %}
+{% set FilePrefix = replacements['FilePrefix'] %}
 {% set DeviceType = replacements['DeviceType'] %}
+{% set DeviceTypeSet = replacements['DeviceTypeSet'] %}
 {% set DeviceDescription = replacements['DeviceDescription'] %}
 {% set RS232x2BoardType = replacements['RS232x2BoardType'] %}
 {% set DF11BoardType = replacements['DF11BoardType'] %}

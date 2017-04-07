@@ -17,8 +17,8 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/* Example for how to setup the MQTT client for the {{ Strs.DeviceType }} RS232x2 Engimusing board
-    There are 2 devices on this board. An LED and a {{ Strs.DeviceType }} {{ Strs.DeviceDescription }}.
+/* Example for how to setup the MQTT client for the {{ Strs.FilePrefix }} RS232x2 Engimusing board
+    There are 2 devices on this board. An LED and a {{ Strs.FilePrefix }} {{ Strs.DeviceDescription }}.
     See {{ Strs.RS232x2DeviceURL }} for more information about the board.
 */
 
@@ -31,7 +31,13 @@
 #include <MqttPort.h>
 #include <MqttModule.h>
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceTypeSet %}
+#include <{{ device }}Device.h>
+{% endfor %}
+{% else %}
 #include <{{ Strs.DeviceType }}Device.h>
+{% endif %}
 {{ Strs.DeviceAdditionalIncludes }}
 
 /*
@@ -40,7 +46,13 @@
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/","PLD":"STATUS"}
+{% endfor %}
+{% else %}
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceType }}/","PLD":"STATUS"}
+{% endif %}
 */
 
 MqttHub HUB;
@@ -53,8 +65,15 @@ MqttSerialPort serialPort2;
 // whenever HUB.update() is called.
 OnOffCtlModule LEDCtrl;
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+{{ Strs.DeviceType[loop.index0] }}Device {{ Strs.DeviceObjName[loop.index0] }};
+SimpleMqttModule {{ Strs.DeviceObjName[loop.index0] }}MqttMod;
+{% endfor %}
+{% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
 SimpleMqttModule {{ Strs.DeviceType }}MqttMod;
+{% endif %}
 
 
 void setup() 
@@ -68,8 +87,15 @@ void setup()
 
 
   {{ Strs.DeviceBeginComment }}
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}.begin({{ Strs.RS232x2DeviceBeginParameters[loop.index0] }});
+  {{ Strs.DeviceObjName[loop.index0] }}MqttMod.begin(HUB, {{ Strs.DeviceObjName[loop.index0] }}, "{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}", 10000);
+{% endfor %}
+{% else %}
   {{ Strs.DeviceType }}.begin({{ Strs.RS232x2DeviceBeginParameters }});
   {{ Strs.DeviceType }}MqttMod.begin(HUB, {{ Strs.DeviceType }}, "{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceType }}", 10000);
+{% endif %}
 }
 
 void loop()

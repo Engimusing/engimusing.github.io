@@ -17,8 +17,8 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/* Example for how to setup the MQTT client for the {{ Strs.DeviceType }} DF11 board using the {{ Strs.DF11BoardType }} Engimusing board
-    There are 2 devices on this board. An LED and a {{ Strs.DeviceType }} {{ Strs.DeviceDescription }}.
+/* Example for how to setup the MQTT client for the {{ Strs.FilePrefix }} DF11 board using the {{ Strs.DF11BoardType }} Engimusing board
+    There are 2 devices on this board. An LED and a {{ Strs.FilePrefix }} {{ Strs.DeviceDescription }}.
     See {{ Strs.DF11DeviceURL }} for more information about the board.
 */
 
@@ -31,7 +31,13 @@
 #include <MqttPort.h>
 #include <MqttModule.h>
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceTypeSet %}
+#include <{{ device }}Device.h>
+{% endfor %}
+{% else %}
 #include <{{ Strs.DeviceType }}Device.h>
+{% endif %}
 {{ Strs.DeviceAdditionalIncludes }}
 
 /*
@@ -40,7 +46,13 @@
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/","PLD":"STATUS"}
+{% endfor %}
+{% else %}
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}/","PLD":"STATUS"}
+{% endif %}
 */
 
 MqttHub HUB;
@@ -52,8 +64,15 @@ MqttSerialPort serialPort;
 // whenever HUB.update() is called.
 OnOffCtlModule LEDCtrl;
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+{{ Strs.DeviceType[loop.index0] }}Device {{ Strs.DeviceObjName[loop.index0] }};
+SimpleMqttModule {{ Strs.DeviceObjName[loop.index0] }}MqttMod;
+{% endfor %}
+{% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
 SimpleMqttModule {{ Strs.DeviceType }}MqttMod;
+{% endif %}
 
 void setup() 
 {
@@ -64,8 +83,15 @@ void setup()
   LEDCtrl.begin(HUB, 13, "{{ Strs.DF11BoardType }}/BOARD/LED", HIGH);
 
   {{ Strs.DeviceBeginComment }}
+  {% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}.begin({{ Strs.DF11DeviceBeginParameters[loop.index0] }});
+  {{ Strs.DeviceObjName[loop.index0] }}MqttMod.begin(HUB, {{ Strs.DeviceObjName[loop.index0] }}, "{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}", 10000);
+{% endfor %}
+{% else %}
   {{ Strs.DeviceType }}.begin({{ Strs.DF11DeviceBeginParameters }});
   {{ Strs.DeviceType }}MqttMod.begin(HUB, {{ Strs.DeviceType }}, "{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}", 10000);
+{% endif %}
 }
 
 void loop() 

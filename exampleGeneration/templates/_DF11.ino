@@ -17,8 +17,8 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-/* Example for how to print out readings from the {{ Strs.DeviceType }}  DF11 board using the ZB USB Engimusing board
-    There are 2 devices on this board. An LED and a {{ Strs.DeviceType }} {{ Strs.DeviceDescription }}.
+/* Example for how to print out readings from the {{ Strs.FilePrefix }}  DF11 board using the {{ Strs.DF11BoardType }} Engimusing board
+    There are 2 devices on this board. An LED and a {{ Strs.FilePrefix }} {{ Strs.DeviceDescription }}.
     See {{ Strs.DF11DeviceURL }} for more information about the board.
 */
 
@@ -26,20 +26,38 @@
 #error Incorrect Board Selected! Please select Engimusing {{ Strs.DF11BoardType }} from the Tools->Board: menu.
 #endif
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceTypeSet %}
+#include <{{ device }}Device.h>
+{% endfor %}
+{% else %}
 #include <{{ Strs.DeviceType }}Device.h>
+{% endif %}
 {{ Strs.DeviceAdditionalIncludes }}
-
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+{{ Strs.DeviceType[loop.index0] }}Device {{ Strs.DeviceObjName[loop.index0] }};
+{% endfor %}
+{% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
+{% endif %}
 
 void setup()
 {
   Serial.begin(115200);
 
   pinMode(LED_BUILTIN, OUTPUT);
-  Serial.println("Simple {{ Strs.DeviceType }} example 0");
+  Serial.println("Simple {{ Strs.FilePrefix }} example 0");
 
   {{ Strs.DeviceBeginComment }}
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}.begin({{ Strs.DF11DeviceBeginParameters[loop.index0] }});
+{% endfor %}
+{% else %}
   {{ Strs.DeviceType }}.begin({{ Strs.DF11DeviceBeginParameters }});
+{% endif %}
+
 }
 
 int lastMillis = 0; // store the last time the current was printed.
@@ -50,7 +68,14 @@ void loop()
 
   static int on = HIGH;
 
+{% if Strs.DeviceCount > 0 %}
+{% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}.update();
+{% endfor %}
+{% else %}
   {{ Strs.DeviceType }}.update();
+{% endif %}
+  
 
   if(millis() - lastMillis > printDelay)
   {

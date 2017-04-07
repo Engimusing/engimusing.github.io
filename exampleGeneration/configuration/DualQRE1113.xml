@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <FilePrefix>DualQRE1113</FilePrefix>
+  <Device>
+    <DeviceType>QRE1113</DeviceType>
+    <DeviceObjName>ReflectiveSensor0</DeviceObjName>
+    <RS232x2DeviceBeginParameters>7,12,10</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>7,2,10</DF11DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>QRE1113</DeviceType>
+    <DeviceObjName>ReflectiveSensor1</DeviceObjName>
+    <RS232x2DeviceBeginParameters>4,11,10</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>4,3,10</DF11DeviceBeginParameters>
+  </Device>
+  <DeviceDescription>dual reflective sensors</DeviceDescription>
+  <RS232x2BoardType>EFM32TG110</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/qre2-1</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/qre1113-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <SerialPrintout>
+    bool switchState[2];
+    bool risingEdge[2];
+    bool fallingEdge[2];
+    switchState[0] = ReflectiveSensor0.switchState();
+    risingEdge[0] = ReflectiveSensor0.risingEdge();
+    fallingEdge[0] = ReflectiveSensor0.fallingEdge();
+    switchState[1] = ReflectiveSensor1.switchState();
+    risingEdge[1] = ReflectiveSensor1.risingEdge();
+    fallingEdge[1] = ReflectiveSensor1.fallingEdge();
+    
+    for(int i = 0; i &lt; 2; i++)
+    {
+      
+      Serial.print("Switch ");
+      Serial.print(i + 1);
+        
+      if(switchState[i])
+      {
+        
+        Serial.println(" state = on");
+      }
+      else
+      {
+        Serial.println(" state = off");
+      }
+      
+      if(risingEdge[i])
+      {
+        Serial.println("Rising Edge");
+      }
+      
+      if(fallingEdge[i])
+      {
+        Serial.println("Falling Edge");
+      }
+    }</SerialPrintout>
+  <Serial1Printout>
+    for(int i = 0; i &lt; 2; i++)
+    {
+      Serial1.print("Switch ");
+      Serial1.print(i + 1);
+        
+      if(switchState[i])
+      {
+        
+        Serial1.println(" state = on");
+      }
+      else
+      {
+        Serial1.println(" state = off");
+      }
+      
+      if(risingEdge[i])
+      {
+        Serial1.println("Rising Edge");
+      }
+      
+      if(fallingEdge[i])
+      {
+        Serial1.println("Falling Edge");
+      }
+    }</Serial1Printout>
+  
+</Replacements>

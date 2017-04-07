@@ -24,11 +24,32 @@ for filename in os.listdir(deviceConfig):
         tree = ET.parse(deviceConfig + filename)
         root = tree.getroot()
         replacements = {}
+        replacements['DeviceCount'] = 0
         for child in root:
-            if child.text:
-                replacements[child.tag] = child.text
+            if child.tag == 'Device':
+                for devices in child:
+                    if not devices.tag in replacements:
+                        replacements[devices.tag] = []
+                        
+                    if child.text:
+                        replacements[devices.tag].append(devices.text)
+                        replacements[devices.tag + 'Set'] = set(replacements[devices.tag])
+                    else:
+                        replacements[devices.tag].append('')   
+                    print devices.tag
+                    print replacements[devices.tag]
+                replacements['DeviceCount'] += 1
             else:
-                replacements[child.tag] = ''
+                if child.text:
+                    replacements[child.tag] = child.text
+                else:
+                    replacements[child.tag] = ''
+          
+        if not 'FilePrefix' in replacements:
+            replacements['FilePrefix'] = replacements['DeviceType']
+        if 'DeviceTypeSet' in replacements:
+            print replacements['DeviceTypeSet']
+        
         for templateFile in os.listdir(templateDir):
             if(templateFile.endswith(".ino")):
                 print templateFile
@@ -38,8 +59,8 @@ for filename in os.listdir(deviceConfig):
                 generatedFile = template.render( replacements = replacements, Year = datetime.now().year  ).strip()
                 
                 if(generatedFile != ''):
-                    outDir = outputDir + replacements['DeviceType'] + templateFile[0:-4] + '/'
-                    outFile = outDir + replacements['DeviceType'] + templateFile
+                    outDir = outputDir + replacements['FilePrefix'] + templateFile[0:-4] + '/'
+                    outFile = outDir + replacements['FilePrefix'] + templateFile
                     print(outFile)
                     if not os.path.exists(outputDir):
                         os.mkdir(outputDir)
