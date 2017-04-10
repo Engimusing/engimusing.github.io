@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>RPI1031</DeviceType>
+  <DeviceDescription>Tilt sensor</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/tilt-4</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/products/rpi1031-1</DF11DeviceURL>
+  <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
+  <DeviceBeginComment>
+  //sets up the 5 pins needed to setup and communicate with the RPI1031</DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>11,12,6,7,8,10</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>3,4,5,6,7,10</DF11DeviceBeginParameters>
+  <SerialPrintout>
+    bool switchState[2];
+    bool risingEdge[2];
+    bool fallingEdge[2];
+      
+    for(int i = 0; i &lt; 2; i++)
+    {
+      switchState[i] = RPI1031.switchState(i);
+      risingEdge[i] = RPI1031.risingEdge(i);
+      fallingEdge[i] = RPI1031.fallingEdge(i);
+      
+      Serial.print("Switch ");
+      Serial.print(i + 1);
+        
+      if(switchState[i])
+      {
+        
+        Serial.println(" state = on");
+      }
+      else
+      {
+        Serial.println(" state = off");
+      }
+      
+      if(risingEdge[i])
+      {
+        Serial.println("Rising Edge");
+      }
+      
+      if(fallingEdge[i])
+      {
+        Serial.println("Falling Edge");
+      }
+    }</SerialPrintout>
+  <Serial1Printout>
+    for(int i = 0; i &lt; 2; i++)
+    {
+      Serial1.print("Switch ");
+      Serial1.print(i + 1);
+        
+      if(switchState[i])
+      {
+        
+        Serial1.println(" state = on");
+      }
+      else
+      {
+        Serial1.println(" state = off");
+      }
+      
+      if(risingEdge[i])
+      {
+        Serial1.println("Rising Edge");
+      }
+      
+      if(fallingEdge[i])
+      {
+        Serial1.println("Falling Edge");
+      }
+    }</Serial1Printout>
+  
+</Replacements>
