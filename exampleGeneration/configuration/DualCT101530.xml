@@ -2,7 +2,19 @@
 <Replacements>
   <GenerateDF11>1</GenerateDF11>
   <GenerateRS232x2>1</GenerateRS232x2>
-  <DeviceType>DualCT101530</DeviceType>
+  <FilePrefix>DualCT101530</FilePrefix>
+  <Device>
+    <DeviceType>CT101530</DeviceType>
+    <DeviceObjName>ReedSwitch0</DeviceObjName>
+    <RS232x2DeviceBeginParameters>6,-1,50</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>4,3,50</DF11DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CT101530</DeviceType>
+    <DeviceObjName>ReedSwitch1</DeviceObjName>
+    <RS232x2DeviceBeginParameters>7,-1,50</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>6,5,50</DF11DeviceBeginParameters>
+  </Device>
   <DeviceDescription>Dual Reed Switches</DeviceDescription>
   <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
   <DF11BoardType>EFM32ZGUSB</DF11BoardType>
@@ -10,19 +22,21 @@
   <DF11DeviceURL>https://www.engimusing.com/products/reedsw-2</DF11DeviceURL>
   <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
   <DeviceBeginComment></DeviceBeginComment>
-  <RS232x2DeviceBeginParameters>6, 7, -1, -1, 50</RS232x2DeviceBeginParameters>
-  <DF11DeviceBeginParameters>4, 6, 3, 5, 50</DF11DeviceBeginParameters>
   <SerialPrintout>
     bool switchState[2];
     bool risingEdge[2];
     bool fallingEdge[2];
+    
+    switchState[0] = ReedSwitch0.switchState();
+    risingEdge[0] = ReedSwitch0.risingEdge();
+    fallingEdge[0] = ReedSwitch0.fallingEdge();
       
+    switchState[1] = ReedSwitch1.switchState();
+    risingEdge[1] = ReedSwitch1.risingEdge();
+    fallingEdge[1] = ReedSwitch1.fallingEdge();
+        
     for(int i = 0; i &lt; 2; i++)
     {
-      switchState[i] = DualCT101530.switchState(i);
-      risingEdge[i] = DualCT101530.risingEdge(i);
-      fallingEdge[i] = DualCT101530.fallingEdge(i);
-      
       Serial.print("Switch ");
       Serial.print(i + 1);
         
