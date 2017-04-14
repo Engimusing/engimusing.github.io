@@ -33,7 +33,6 @@ import logging
 import logging.handlers
 
 LOG_FILENAME = "/var/log/serial2mqtt/serial2mqtt.log"
-#LOG_FILENAME = "serial2mqtt.log"
 
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
@@ -277,40 +276,14 @@ def on_message(mqttc, userdata, msg):
         logging.info( "toSerialPort_q full")
 
 def main(argv):
+    logging.info("started at main")
     global serialPort
     global mqttHostAddress
     global mqttPort
     global mqttUsername
     global mqttPassword
     global initialRetries
-    
-    try:
-        opts, args = getopt.getopt(argv, "hp:a:m:u:w:r:", ["serialPort=","mqttHostAddress=", "mqttPort=", "mqttUsername=", "mqttPassword=", "retries="])
-    except getopt.GetoptError:
-        logging.info( 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>')
-        sys.exit(-1)
-   
-    for opt, arg in opts:        
-        if opt == '-h':
-            logging.info( 'usage EFM_Serial2Mqtt -p <Serial Port> -a <MQTT Server Address> -m <MQTT Server Port> -u <MQTT Username> -w <MQTT Password> -r <Serial Port Retries>')
-            sys.exit(-1)
-        elif opt in ("-p", "--serialPort"):
-            serialPort = arg
-        elif opt in ("-a", "--mqttHostAddress"):
-            mqttHostAddress = arg
-        elif opt in ("-m", "--mqttPort"):
-            mqttPort = arg
-        elif opt in ("-u", "--mqttUsername"):
-            mqttUsername = arg
-        elif opt in ("-w", "--mqttPassword"):
-            mqttPassword = arg
-        elif opt in ("-r", "--retries"):
-            try:
-                initialRetries = int(arg)
-            except:
-                logging.info( 'retries argument not an integer')
-    
-    
+        
     # Create a single input and a single output queue for all threads.
     fromSerialPort_q = Queue.Queue()
     serialPort = getSerialPort()
