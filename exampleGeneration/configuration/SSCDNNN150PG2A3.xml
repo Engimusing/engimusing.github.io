@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <DeviceType>SSCDNNN150PG2A3</DeviceType>
+  <DeviceDescription>SSCDNNN150PG2A3 150PSI (1MPa) Pressure Sensor</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>pre-release</RS232x2DeviceURL>
+  <DF11DeviceURL>pre-release</DF11DeviceURL>
+  <DeviceAdditionalIncludes>#include &lt;Wire.h&gt;</DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <RS232x2DeviceBeginParameters>Wire0, 0</RS232x2DeviceBeginParameters>
+  <DF11DeviceBeginParameters>Wire0, 0</DF11DeviceBeginParameters>
+  <SerialPrintout>
+    float pressure = SSCDNNN150PG2A3.readPressure();
+    Serial.print("Pressure = ");
+    Serial.println(pressure);</SerialPrintout>
+  <Serial1Printout>
+    Serial1.print("Pressure = ");
+    Serial1.println(pressure);</Serial1Printout>
+</Replacements>
