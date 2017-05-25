@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>0</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <FilePrefix>CapSense</FilePrefix>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense0</DeviceObjName>
+    <RS232x2DeviceBeginParameters>15,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense1</DeviceObjName>
+    <RS232x2DeviceBeginParameters>8,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense2</DeviceObjName>
+    <RS232x2DeviceBeginParameters>4,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense3</DeviceObjName>
+    <RS232x2DeviceBeginParameters>3,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense4</DeviceObjName>
+    <RS232x2DeviceBeginParameters>9,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense5</DeviceObjName>
+    <RS232x2DeviceBeginParameters>13,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense6</DeviceObjName>
+    <RS232x2DeviceBeginParameters>2,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense7</DeviceObjName>
+    <RS232x2DeviceBeginParameters>10,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense8</DeviceObjName>
+    <RS232x2DeviceBeginParameters>14,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense9</DeviceObjName>
+    <RS232x2DeviceBeginParameters>1,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense_Star</DeviceObjName>
+    <RS232x2DeviceBeginParameters>11,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>CapSense</DeviceType>
+    <DeviceObjName>CapSense_Hash</DeviceObjName>
+    <RS232x2DeviceBeginParameters>0,50.0</RS232x2DeviceBeginParameters>
+  </Device>
+  
+  <DeviceDescription>Capacitance Sensors</DeviceDescription>
+  <RS232x2BoardType>EFM32TG222</RS232x2BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/products/</RS232x2DeviceURL>
+  <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <SerialPrintout>
+    bool state[12];
+    bool risingEdge[12];
+    bool fallingEdge[12];
+    
+    state[0] = CapSense0.state();
+    risingEdge[0] = CapSense0.risingEdge();
+    fallingEdge[0] = CapSense0.fallingEdge();
+
+    state[1] = CapSense1.state();
+    risingEdge[1] = CapSense1.risingEdge();
+    fallingEdge[1] = CapSense1.fallingEdge();
+
+    state[2] = CapSense2.state();
+    risingEdge[2] = CapSense2.risingEdge();
+    fallingEdge[2] = CapSense2.fallingEdge();
+
+    state[3] = CapSense3.state();
+    risingEdge[3] = CapSense3.risingEdge();
+    fallingEdge[3] = CapSense3.fallingEdge();
+
+    state[4] = CapSense4.state();
+    risingEdge[4] = CapSense4.risingEdge();
+    fallingEdge[4] = CapSense4.fallingEdge();
+
+    state[5] = CapSense5.state();
+    risingEdge[5] = CapSense5.risingEdge();
+    fallingEdge[5] = CapSense5.fallingEdge();
+
+    state[6] = CapSense6.state();
+    risingEdge[6] = CapSense6.risingEdge();
+    fallingEdge[6] = CapSense6.fallingEdge();
+
+    state[7] = CapSense7.state();
+    risingEdge[7] = CapSense7.risingEdge();
+    fallingEdge[7] = CapSense7.fallingEdge();
+
+    state[8] = CapSense8.state();
+    risingEdge[8] = CapSense8.risingEdge();
+    fallingEdge[8] = CapSense8.fallingEdge();
+
+    state[9] = CapSense9.state();
+    risingEdge[9] = CapSense9.risingEdge();
+    fallingEdge[9] = CapSense9.fallingEdge();
+
+    state[10] = CapSense_Star.state();
+    risingEdge[10] = CapSense_Star.risingEdge();
+    fallingEdge[10] = CapSense_Star.fallingEdge();
+
+    state[11] = CapSense_Hash.state();
+    risingEdge[11] = CapSense_Hash.risingEdge();
+    fallingEdge[11] = CapSense_Hash.fallingEdge();
+
+    
+    for(int i = 0; i &lt; 12; i++)
+    {
+        Serial.print("Sensor ");
+      
+        if(i &lt; 10)
+        {
+            Serial.print(i);
+        }
+        else if(i == 10)
+        {
+            Serial.print("Star");
+        }
+        else if(i == 11)
+        {
+            Serial.print("Hash");
+        }
+        Serial.println(":");
+        
+        if(state[i])
+        {
+        
+            Serial.println(" state = on");
+        }
+        else
+        {
+            Serial.println(" state = off");
+        }
+      
+        if(risingEdge[i])
+        {
+            Serial.println("Rising Edge");
+        }
+      
+        if(fallingEdge[i])
+        {
+            Serial.println("Falling Edge");
+        }
+    }</SerialPrintout>
+  <Serial1Printout>
+    for(int i = 0; i &lt; 12; i++)
+    {
+        Serial1.print("Sensor ");
+
+        if(i &lt; 10)
+        {
+            Serial1.print(i);
+        }
+        else if(i == 10)
+        {
+            Serial1.print("Star");
+        }
+        else if(i == 11)
+        {
+            Serial1.print("Hash");
+        }
+        
+        Serial1.println(":");
+
+        if(state[i])
+        {
+            Serial1.println(" state = on");
+        }
+        else      
+        {
+            Serial1.println(" state = off");
+        }
+
+        if(risingEdge[i])
+        {
+            Serial1.println("Rising Edge");
+        }
+
+        if(fallingEdge[i])
+        {
+            Serial1.println("Falling Edge");
+        }
+    }</Serial1Printout>
+</Replacements>
