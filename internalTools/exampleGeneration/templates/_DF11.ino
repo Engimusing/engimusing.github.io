@@ -26,6 +26,8 @@
 #error Incorrect Board Selected! Please select Engimusing {{ Strs.DF11BoardType }} from the Tools->Board: menu.
 #endif
 
+#include <DevicePrinter.h>
+
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceTypeSet %}
 #include <{{ device }}Device.h>
@@ -37,17 +39,28 @@
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
 {{ Strs.DeviceType[loop.index0] }}Device {{ Strs.DeviceObjName[loop.index0] }};
+DevicePrinter {{ Strs.DeviceObjName[loop.index0] }}Printer;
 {% endfor %}
 {% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
+DevicePrinter {{ Strs.DeviceType }}Printer;
 {% endif %}
 TOGGLEClass led;
+
 
 void setup()
 {
   Serial.begin(115200);
   led.begin(1000);
 
+  {% if Strs.DeviceCount > 0 %}
+  {% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}Printer.begin(Serial, {{ Strs.DeviceObjName[loop.index0] }}, 5000, "{{ Strs.DeviceObjName[loop.index0] }}");
+  {% endfor %}
+  {% else %}
+  {{ Strs.DeviceType }}Printer.begin(Serial, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
+  {% endif %}
+  
   Serial.println("Simple {{ Strs.FilePrefix }} example 0");
 
   {{ Strs.DeviceBeginComment }}
@@ -72,6 +85,13 @@ void loop()
   {{ Strs.DeviceType }}.update();
 {% endif %}
 
-   led.update();
+{% if Strs.DeviceCount > 0 %}
+  {% for device in Strs.DeviceType %}
+  {{ Strs.DeviceObjName[loop.index0] }}Printer.update();
+  {% endfor %}
+  {% else %}
+  {{ Strs.DeviceType }}Printer.update();
+  {% endif %}
+  led.update();
 }
 {% endif %}
