@@ -18,6 +18,7 @@ set ARDUINO_EXE_DIR=D:\emus2016\Arduino1-6-9
 set PACKAGES_DIR=C:\Users\Tim\AppData\Local\Arduino15\packages
 set ADDITIONAL_LIBRARY_DIR=C:\Users\Tim\Documents\Arduino\libraries
 set EXAMPLES_DIR=D:\emus2016\ArduinoSketchbook\Arduino15\packages\engimusing\hardware\efm32\1.0.1\libraries
+set SUMMARY_LOG=%~dp0\exampleBuildLogs\summary.log
 
 pushd %EXAMPLES_DIR%
 for %%a in (%boards%) do (
@@ -30,7 +31,6 @@ popd
 
 pause
 Exit /B 0
-
 
 :BuildExample 
 
@@ -70,18 +70,27 @@ arduino-builder ^
 -build-path "%BUILD_DIR%" ^
 -warnings=none ^
 -prefs=build.warn_data_percentage=75 "%~1" 2>&1 > NUL | findstr /i "error" >  %~dp0\exampleBuildLogs\temp.log 
+
 findstr /i /v "Incorrect Board" %~dp0\exampleBuildLogs\temp.log >  %~dp0\exampleBuildLogs\temp_2.log
 
-Call :CheckFile %~dp0\exampleBuildLogs\temp_2.log %~1 %~2
+Call :CheckFile %~dp0\exampleBuildLogs\temp_2.log %~dp0\exampleBuildLogs\temp.log %~1 %~2
 
 popd
 
 EXIT /B 0
 
 :CheckFile
+if %~z2 EQU 0 (
+    echo Sucessfully built %~n3 for %~4 >> %SUMMARY_LOG%
+) else (
 if %~z1 GTR 0 (
-    echo %~n2 for board %~3 failed
-    copy %~1 %~d1%~p1\%~n2-%~3.log
+    echo Failed building %~n3 for %~4
+    echo %~n3 for board %~4 failed >> %SUMMARY_LOG%
+    
+    copy %~1 %~d1%~p1\%~n3-%~4.log
+) else (
+    echo Ignorable error building %~n3 for %~4  >> %SUMMARY_LOG%
+)
 )
 
 Exit /B 0
