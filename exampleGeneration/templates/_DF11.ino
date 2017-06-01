@@ -41,12 +41,13 @@
 {% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
 {% endif %}
+TOGGLEClass led;
 
 void setup()
 {
   Serial.begin(115200);
+  led.begin(1000);
 
-  pinMode(LED_BUILTIN, OUTPUT);
   Serial.println("Simple {{ Strs.FilePrefix }} example 0");
 
   {{ Strs.DeviceBeginComment }}
@@ -60,13 +61,8 @@ void setup()
 
 }
 
-int lastMillis = 0; // store the last time the current was printed.
-int printDelay = 1000; //print every second.
-
 void loop()
 {
-
-  static int on = HIGH;
 
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
@@ -75,16 +71,7 @@ void loop()
 {% else %}
   {{ Strs.DeviceType }}.update();
 {% endif %}
-  
 
-  if(millis() - lastMillis > printDelay)
-  {
-    lastMillis = millis();
-
-    digitalWrite(LED_BUILTIN, on);   // toggle the LED (HIGH is the voltage level)
-    {{ Strs.SerialPrintout }}
-
-    on = (on) ? LOW : HIGH;  // on alternates between LOW and HIGH
-  }
+   led.update();
 }
 {% endif %}
