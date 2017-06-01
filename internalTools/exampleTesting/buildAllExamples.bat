@@ -13,9 +13,13 @@ engimusing_efm32g232 ^
 engimusing_efm32wg840 ^
 engimusing_efm32wg842
 
-set BUILD_DIR=D:\emus2016\ArduinoSketchbook\Arduino15\packages\engimusing\hardware\efm32\1.0.1\libraries\buildAllExamples
+set BUILD_DIR=D:\emus2016\gitrepos\engimusingio\internalTools\exampleTesting\tempBuildDir
+set ARDUINO_EXE_DIR=D:\emus2016\Arduino1-6-9
+set PACKAGES_DIR=C:\Users\Tim\AppData\Local\Arduino15\packages
+set ADDITIONAL_LIBRARY_DIR=C:\Users\Tim\Documents\Arduino\libraries
+set EXAMPLES_DIR=D:\emus2016\ArduinoSketchbook\Arduino15\packages\engimusing\hardware\efm32\1.0.1\libraries
 
-pushd %~dp0
+pushd %EXAMPLES_DIR%
 for %%a in (%boards%) do (
     for /R %%f in (*.ino) do (
         Call :BuildExample %%f %%a
@@ -39,13 +43,13 @@ mkdir %BUILD_DIR% 2> NUL
 arduino-builder ^
 -dump-prefs ^
 -logger=machine ^
--hardware "D:\emus2016\Arduino1-6-9\hardware" ^
--hardware "C:\Users\Tim\AppData\Local\Arduino15\packages" ^
--tools "D:\emus2016\Arduino1-6-9\tools-builder" ^
--tools "D:\emus2016\Arduino1-6-9\hardware\tools\avr" ^
--tools "C:\Users\Tim\AppData\Local\Arduino15\packages" ^
--built-in-libraries "D:\emus2016\Arduino1-6-9\libraries" ^
--libraries "C:\Users\Tim\Documents\Arduino\libraries" ^
+-hardware "%ARDUINO_EXE_DIR%\hardware" ^
+-hardware "%PACKAGES_DIR%" ^
+-tools "%ARDUINO_EXE_DIR%\tools-builder" ^
+-tools "%ARDUINO_EXE_DIR%\hardware\tools\avr" ^
+-tools "%PACKAGES_DIR%" ^
+-built-in-libraries "%ARDUINO_EXE_DIR%\libraries" ^
+-libraries "%ADDITIONAL_LIBRARY_DIR%" ^
 -fqbn=engimusing:efm32:%~2 ^
 -ide-version=10609 ^
 -build-path "%BUILD_DIR%" ^
@@ -54,13 +58,13 @@ arduino-builder ^
 
 arduino-builder ^
 -compile -logger=machine ^
--hardware "D:\emus2016\Arduino1-6-9\hardware" ^
--hardware "C:\Users\Tim\AppData\Local\Arduino15\packages" ^
--tools "D:\emus2016\Arduino1-6-9\tools-builder" ^
--tools "D:\emus2016\Arduino1-6-9\hardware\tools\avr" ^
--tools "C:\Users\Tim\AppData\Local\Arduino15\packages" ^
--built-in-libraries "D:\emus2016\Arduino1-6-9\libraries" ^
--libraries "C:\Users\Tim\Documents\Arduino\libraries" ^
+-hardware "%ARDUINO_EXE_DIR%\hardware" ^
+-hardware "%PACKAGES_DIR%" ^
+-tools "%ARDUINO_EXE_DIR%\tools-builder" ^
+-tools "%ARDUINO_EXE_DIR%\hardware\tools\avr" ^
+-tools "%PACKAGES_DIR%" ^
+-built-in-libraries "%ARDUINO_EXE_DIR%\libraries" ^
+-libraries "%ADDITIONAL_LIBRARY_DIR%" ^
 -fqbn=engimusing:efm32:%~2 ^
 -ide-version=10609 ^
 -build-path "%BUILD_DIR%" ^
