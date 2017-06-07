@@ -48,7 +48,7 @@ DevicePrinter {{ Strs.DeviceObjName[loop.index0] }}Printer1;
 DevicePrinter {{ Strs.DeviceType }}Printer0;
 DevicePrinter {{ Strs.DeviceType }}Printer1;
 {% endif %}
-TOGGLEClass led;
+TogglePin led;
 
 void setup()
 {
@@ -68,7 +68,6 @@ void setup()
   {{ Strs.DeviceType }}Printer0.begin(Serial, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
   {{ Strs.DeviceType }}Printer1.begin(Serial1, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
   {% endif %}
-  
   {{ Strs.DeviceBeginComment }}
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}

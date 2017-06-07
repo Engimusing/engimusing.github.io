@@ -45,7 +45,7 @@ DevicePrinter {{ Strs.DeviceObjName[loop.index0] }}Printer;
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
 DevicePrinter {{ Strs.DeviceType }}Printer;
 {% endif %}
-TOGGLEClass led;
+TogglePin led;
 
 
 void setup()
@@ -60,9 +60,7 @@ void setup()
   {% else %}
   {{ Strs.DeviceType }}Printer.begin(Serial, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
   {% endif %}
-  
   Serial.println("Simple {{ Strs.FilePrefix }} example 0");
-
   {{ Strs.DeviceBeginComment }}
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
@@ -76,7 +74,6 @@ void setup()
 
 void loop()
 {
-
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
   {{ Strs.DeviceObjName[loop.index0] }}.update();
@@ -84,7 +81,6 @@ void loop()
 {% else %}
   {{ Strs.DeviceType }}.update();
 {% endif %}
-
 {% if Strs.DeviceCount > 0 %}
   {% for device in Strs.DeviceType %}
   {{ Strs.DeviceObjName[loop.index0] }}Printer.update();
