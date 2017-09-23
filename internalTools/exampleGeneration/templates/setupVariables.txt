@@ -14,3 +14,5 @@
 {% set SerialPrintout = replacements['SerialPrintout'] %}
 {% set Serial1Printout = replacements['Serial1Printout'] %}
 {% set DeviceBeginComment = replacements['DeviceBeginComment'] %}
+{% set SerialParser = replacements['SerialParser'] %}
+{% set Serial1Parser = replacements['Serial1Parser'] %}

@@ -88,6 +88,9 @@ void loop()
   {% else %}
   {{ Strs.DeviceType }}Printer.update();
   {% endif %}
+  
+  {{ Strs.SerialParser }}
+  
   led.update();
 }
 {% endif %}

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Replacements>
+  <GenerateDF11>1</GenerateDF11>
+  <GenerateRS232x2>1</GenerateRS232x2>
+  <FilePrefix>DualCPC1002N</FilePrefix>
+  <Device>
+    <DeviceType>OnOffCtrl</DeviceType>
+    <DeviceObjName>CPC1002N_0</DeviceObjName>
+    <RS232x2DeviceBeginParameters>7, false, HIGH</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>6, false, HIGH</DF11DeviceBeginParameters>
+  </Device>
+  <Device>
+    <DeviceType>OnOffCtrl</DeviceType>
+    <DeviceObjName>CPC1002N_1</DeviceObjName>
+    <RS232x2DeviceBeginParameters>8, false, HIGH</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>10, false, HIGH</DF11DeviceBeginParameters>
+  </Device>
+  <DeviceDescription>Dual DC Switches</DeviceDescription>
+  <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
+  <DF11BoardType>EFM32ZGUSB</DF11BoardType>
+  <RS232x2DeviceURL>https://www.engimusing.com/collections/relays/products/ssr_dc-5</RS232x2DeviceURL>
+  <DF11DeviceURL>https://www.engimusing.com/collections/relays/products/ssr_dc-2</DF11DeviceURL>
+  <DeviceAdditionalIncludes></DeviceAdditionalIncludes>
+  <DeviceBeginComment></DeviceBeginComment>
+  <SerialParser>
+  static char buffer[4];
+  //Parse Serial port and if 0:ON, 0:OF, 1:ON, or 1:OF are sent  then turn on or of the DC relays
+  if(Serial.available())
+  {
+      for(int i = 0; i &lt; 3; i++)
+      {
+        buffer[i] = buffer[i+1];
+      }
+      
+      buffer[3] = Serial.read();
+  }
+  
+  if(buffer[0] == &apos;0&apos;)
+  {
+    if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;N&apos;)
+    {
+        CPC1002N_0.setState(true);
+    }
+    else if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;F&apos;)
+    {
+        CPC1002N_0.setState(false);
+    }
+  }
+  if(buffer[0] == &apos;1&apos;)
+  {
+    if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;N&apos;)
+    {
+        CPC1002N_1.setState(true);
+    }
+    else if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;F&apos;)
+    {
+        CPC1002N_1.setState(false);
+    }
+  }</SerialParser>
+  <Serial1Parser>
+  static char buffer1[4];
+  
+  //Parse Serial1 port and if 0:ON, 0:OF, 1:ON, or 1:OF are sent  then turn on or of the DC relays
+  if(Serial1.available())
+  {
+      for(int i = 0; i &lt; 3; i++)
+      {
+        buffer1[i] = buffer1[i+1];
+      }
+      
+      buffer1[3] = Serial1.read();
+  }
+  
+  if(buffer1[0] == &apos;0&apos;)
+  {
+    if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;N&apos;)
+    {
+        CPC1002N_0.setState(true);
+    }
+    else if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;F&apos;)
+    {
+        CPC1002N_0.setState(false);
+    }
+  }
+  if(buffer1[0] == &apos;1&apos;)
+  {
+    if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;N&apos;)
+    {
+        CPC1002N_1.setState(true);
+    }
+    else if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;F&apos;)
+    {
+        CPC1002N_1.setState(false);
+    }
+  }</Serial1Parser>  
+</Replacements>
