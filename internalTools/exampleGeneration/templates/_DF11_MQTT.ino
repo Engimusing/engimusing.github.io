@@ -45,13 +45,14 @@
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"ON"}
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
   {"TOP":"{{ Strs.DF11BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
-
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
-  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/","PLD":"STATUS"}
+{{ Strs.DF11AdditionalMQTTCommand[loop.index0] }}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/CTL","PLD":"STATUS"}
 {% endfor %}
 {% else %}
-  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}/","PLD":"STATUS"}
+{{ Strs.DF11AdditionalMQTTCommand }}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/{{ Strs.DeviceType }}/CTL","PLD":"STATUS"}
 {% endif %}
 */
 

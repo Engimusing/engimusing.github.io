@@ -45,13 +45,14 @@
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/LED/CTL","PLD":"ON"}
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/LED/CTL","PLD":"OFF"}
   {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/LED/CTL","PLD":"STATUS"}
-
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
-  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/","PLD":"STATUS"}
+{{ Strs.RS232x2AdditionalMQTTCommand[loop.index0] }}
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceObjName[loop.index0] }}/CTL","PLD":"STATUS"}
 {% endfor %}
 {% else %}
-  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceType }}/","PLD":"STATUS"}
+{{ Strs.RS232x2AdditionalMQTTCommand }}
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/{{ Strs.DeviceType }}/CTL","PLD":"STATUS"}
 {% endif %}
 */
 

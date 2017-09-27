@@ -99,10 +99,8 @@ void loop()
   {{ Strs.DeviceType }}Printer0.update();
   {{ Strs.DeviceType }}Printer1.update();
   {% endif %}
-  
   {{ Strs.SerialParser }}
   {{ Strs.Serial1Parser }}
-  
   led.update();
 }
 {% endif %}

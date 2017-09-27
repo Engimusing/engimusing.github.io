@@ -8,12 +8,24 @@
     <DeviceObjName>CPC1002N_0</DeviceObjName>
     <RS232x2DeviceBeginParameters>7, false, HIGH</RS232x2DeviceBeginParameters>
     <DF11DeviceBeginParameters>6, false, HIGH</DF11DeviceBeginParameters>
+    <RS232x2AdditionalMQTTCommand>  
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/CPC1002N_0/CTL","PLD":"ON"}
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/CPC1002N_0/CTL","PLD":"OFF"}</RS232x2AdditionalMQTTCommand>
+    <DF11AdditionalMQTTCommand>  
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/CPC1002N_0/CTL","PLD":"ON"}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/CPC1002N_0/CTL","PLD":"OFF"}</DF11AdditionalMQTTCommand>
   </Device>
   <Device>
     <DeviceType>OnOffCtrl</DeviceType>
     <DeviceObjName>CPC1002N_1</DeviceObjName>
-    <RS232x2DeviceBeginParameters>8, false, HIGH</RS232x2DeviceBeginParameters>
-    <DF11DeviceBeginParameters>10, false, HIGH</DF11DeviceBeginParameters>
+    <RS232x2DeviceBeginParameters>8, false, LOW</RS232x2DeviceBeginParameters>
+    <DF11DeviceBeginParameters>10, false, LOW</DF11DeviceBeginParameters>
+    <RS232x2AdditionalMQTTCommand>  
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/CPC1002N_1/CTL","PLD":"ON"}
+  {"TOP":"{{ Strs.RS232x2BoardType }}/BOARD/CPC1002N_1/CTL","PLD":"OFF"}</RS232x2AdditionalMQTTCommand>
+    <DF11AdditionalMQTTCommand>  
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/CPC1002N_1/CTL","PLD":"ON"}
+  {"TOP":"{{ Strs.DF11BoardType }}/BOARD/CPC1002N_1/CTL","PLD":"OFF"}</DF11AdditionalMQTTCommand>
   </Device>
   <DeviceDescription>Dual DC Switches</DeviceDescription>
   <RS232x2BoardType>EFM32ZG108</RS232x2BoardType>
