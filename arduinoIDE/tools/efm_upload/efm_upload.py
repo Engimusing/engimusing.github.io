@@ -156,6 +156,8 @@ try:
     
     
     s.sendBreak(0.25)
+    s.write(' ')
+    s.sendBreak(0.25)
     
     # loop waiting for question mark, send r and ' ' again after timeout
     print "Device Reset Check"
