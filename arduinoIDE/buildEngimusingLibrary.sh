@@ -41,7 +41,7 @@ sha256sum efm32-$VERSION.tar.gz | grep -Eo '^[^ ]+' | tr -d '\n' >> buffer.json
 echo \", >> buffer.json
 echo		-n    \"size\": \" >> buffer.json
 wc -c efm32-$VERSION.tar.gz | grep -Eo '^[^ ]+' | tr -d '\n' >> buffer.json
-echo \" >> buffer.json
+echo \", >> buffer.json
 echo		    \"help\": { >> buffer.json
 echo			\"online\": \"http://www.engimusing.com\" >> buffer.json
 echo		    }, >> buffer.json
