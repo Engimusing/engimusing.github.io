@@ -1,0 +1,10 @@
+{
+    "packages": [{
+	"name": "engimusing",
+	"maintainer": "Engimusing LLC",
+	"websiteURL": "http://www.engimusing.com/",
+	"email": "support@engimusing.com",
+	"help": {
+	    "online": "http://www.engimusing.com"
+	},
+	"platforms": [
