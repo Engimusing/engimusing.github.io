@@ -1,6 +1,6 @@
 export VERSION=1.0.3
 
-export BUILD_TOOLS=1
+export BUILD_TOOLS=0
 export TOOLS_VERSION=1.1
 
 mkdir $VERSION
@@ -11,9 +11,9 @@ cp ./platform.txt ./platform2.txt
 sed '19s/.*/version='$VERSION'/' platform2.txt > platform.txt
 rm ./platform2.txt
 
-# git add platform.txt
-# git commit -m 'Moving platform.txt upto the new version:'$VERSION
-# git push
+git add platform.txt
+git commit -m 'Moving platform.txt upto the new version:'$VERSION
+git push
 cd ..
 
 tar czvf efm32-$VERSION.tar.gz $VERSION
