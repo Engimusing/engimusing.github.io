@@ -71,7 +71,7 @@
 	    "archiveFileName": "efm32-1.0.1.tar.bz2",
 	    "checksum": "SHA-256:2f9db80c82c8667bcb8f699d414088b698ea65f1c308e2273947a4d0730b1f39",
 	    "size": "1256697",
-	    "help": {
+	    "help":  {
 		"online": "http://www.engimusing.com"
 	    },
 	    "boards": [
