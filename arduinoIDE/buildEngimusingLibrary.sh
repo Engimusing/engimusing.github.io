@@ -16,7 +16,7 @@ rm ./platform2.txt
 # git push
 cd ..
 
-tar czvf efm32-$VERSION.tar.gz ./$VERSION
+tar czvf efm32-$VERSION.tar.gz $VERSION
 
 rm -r $VERSION
 

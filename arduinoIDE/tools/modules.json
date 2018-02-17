@@ -5,45 +5,45 @@
 [
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-linux64.tar.gz",
-"checksum": "SHA-256:7e433cb10539080b7f94c89484d3208c8fe4dff163a0c36ef701ce3111802d13",
+"checksum": "SHA-256:b54f6cc3761283a1b2b257d574cb0d251379a622f52607ded448fae2c7425ab8",
 "host": "x86_64-pc-linux-gnu",
 "archiveFileName": "efm_tools-1.1-linux64.tar.gz",
-"size": "3922180"
+"size": "3921910"
 },
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-linux32.tar.gz",
-"checksum": "SHA-256:2891d19ff031de1a42814b3ca7102e4917b0fca5386f97105da0bea6446eac62",
+"checksum": "SHA-256:810e7e95729992271096d9c566118c97673fa41a45b97966b09f57e4e2ab748e",
 "host": "i686-pc-linux-gnu",
 "archiveFileName": "efm_tools-1.1-linux32.tar.gz",
-"size": "2471437"
+"size": "2471435"
 },
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-linuxArm32.tar.gz",
-"checksum": "SHA-256:fdf2dd31ada9e6d459418373210cb99219ae639df869ee38595201a0c6e20ff1",
+"checksum": "SHA-256:15f17977a7bd4aea4a79c672748ae072e020e7ddd5c63d0f7476fdf900c87715",
 "host": "arm-linux-gnueabihf",
 "archiveFileName": "efm_tools-1.1-linuxArm32.tar.gz",
-"size": "2530175"
+"size": "2530195"
 },
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-win32.tar.gz",
-"checksum": "SHA-256:45de312f3912abaf7ad5ce351d7019abe18b6d37e70b6e85bbbcaaa7ae8ba1aa",
+"checksum": "SHA-256:9b475cb7ca39271f8400302d01c749006051cbb12a6a06a7eb84537cb6ab5e22",
 "host": "i686-mingw32",
 "archiveFileName": "efm_tools-1.1-win32.tar.gz",
-"size": "6115928"
+"size": "6115926"
 },
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-osx64.tar.gz",
-"checksum": "SHA-256:cf889880a3c518c27f0cafd0d60711d57b3c92f264974f63e7155598d16a7e0f",
+"checksum": "SHA-256:98599038226270380d9a1da37cc83159d6b380207474f1703616ed4698f04ebc",
 "host": "x86_64-apple-darwin",
 "archiveFileName": "efm_tools-1.1-osx64.tar.gz",
-"size": "9347846"
+"size": "9348145"
 },
 {
 "url": "http://engimusing.github.io/arduinoIDE/tools/efm_tools-1.1-osx64.tar.gz",
-"checksum": "SHA-256:cf889880a3c518c27f0cafd0d60711d57b3c92f264974f63e7155598d16a7e0f",
+"checksum": "SHA-256:98599038226270380d9a1da37cc83159d6b380207474f1703616ed4698f04ebc",
 "host": "i386-apple-darwin",
 "archiveFileName": "efm_tools-1.1-osx64.tar.gz",
-"size": "9347846"
+"size": "9348145"
 }
 ]
 },
