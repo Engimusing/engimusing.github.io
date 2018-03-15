@@ -1,0 +1,14 @@
+There are now scripts for automatically packaging the latest EFM32 source for the ArdunioIDE. 
+
+First thing is to make sure any changes needed for the tools are included in the tools directory before running the buildEngmusingLibrary.sh script. 
+If there are not any tools changes then the BUILD_TOOLS variable can be set to 0 in the buildEngmusingLibrary.sh script.
+
+Next make sure the VERSION and TOOLS_VERSION variables are correct for what you want to build. 
+
+Once that is all verified then buildEngimusingLibrary.sh can be run.
+
+After it has been run then the modified json and tar files can be checked in using GIT and the ardunio IDE will find the new tars.
+You can also test out the json files using the test directories if you want to be sure they work before making them live to the world.
+
+
+
