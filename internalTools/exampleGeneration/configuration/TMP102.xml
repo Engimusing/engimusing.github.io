@@ -18,6 +18,7 @@
     Serial.println(temp);</SerialPrintout>
   <Serial1Printout>
     Serial1.print("temperature = ");
-    Serial1.println(temp);</Serial1Printout>
+    Serial1.println(temp);
+  </Serial1Printout>
   
 </Replacements>

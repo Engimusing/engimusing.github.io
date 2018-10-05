@@ -19,8 +19,7 @@
   <SerialPrintout>
     float current = ACS716.instantCurrent();
     Serial.print("Current Amperage = ");
-    Serial.println(current);
-  </SerialPrintout>
+    Serial.println(current);</SerialPrintout>
   <Serial1Printout>
     Serial1.print("Current Amperage = ");
     Serial1.println(current);

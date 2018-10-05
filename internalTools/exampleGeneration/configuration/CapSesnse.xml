@@ -73,7 +73,7 @@
     bool state[12];
     bool risingEdge[12];
     bool fallingEdge[12];
-    
+
     state[0] = CapSense0.state();
     risingEdge[0] = CapSense0.risingEdge();
     fallingEdge[0] = CapSense0.fallingEdge();
@@ -122,82 +122,83 @@
     risingEdge[11] = CapSense_Hash.risingEdge();
     fallingEdge[11] = CapSense_Hash.fallingEdge();
 
-    
+
     for(int i = 0; i &lt; 12; i++)
     {
-        Serial.print("Sensor ");
-      
-        if(i &lt; 10)
-        {
-            Serial.print(i);
-        }
-        else if(i == 10)
-        {
-            Serial.print("Star");
-        }
-        else if(i == 11)
-        {
-            Serial.print("Hash");
-        }
-        Serial.println(":");
-        
-        if(state[i])
-        {
-        
-            Serial.println(" state = on");
-        }
-        else
-        {
-            Serial.println(" state = off");
-        }
-      
-        if(risingEdge[i])
-        {
-            Serial.println("Rising Edge");
-        }
-      
-        if(fallingEdge[i])
-        {
-            Serial.println("Falling Edge");
-        }
+      Serial.print("Sensor ");
+
+      if(i &lt; 10)
+      {
+        Serial.print(i);
+      }
+      else if(i == 10)
+      {
+        Serial.print("Star");
+      }
+      else if(i == 11)
+      {
+        Serial.print("Hash");
+      }
+      Serial.println(":");
+
+      if(state[i])
+      {
+
+        Serial.println(" state = on");
+      }
+      else
+      {
+        Serial.println(" state = off");
+      }
+
+      if(risingEdge[i])
+      {
+        Serial.println("Rising Edge");
+      }
+
+      if(fallingEdge[i])
+      {
+        Serial.println("Falling Edge");
+      }
     }</SerialPrintout>
   <Serial1Printout>
     for(int i = 0; i &lt; 12; i++)
     {
-        Serial1.print("Sensor ");
+      Serial1.print("Sensor ");
 
-        if(i &lt; 10)
-        {
-            Serial1.print(i);
-        }
-        else if(i == 10)
-        {
-            Serial1.print("Star");
-        }
-        else if(i == 11)
-        {
-            Serial1.print("Hash");
-        }
-        
-        Serial1.println(":");
+      if(i &lt; 10)
+      {
+        Serial1.print(i);
+      }
+      else if(i == 10)
+      {
+        Serial1.print("Star");
+      }
+      else if(i == 11)
+      {
+        Serial1.print("Hash");
+      }
 
-        if(state[i])
-        {
-            Serial1.println(" state = on");
-        }
-        else      
-        {
-            Serial1.println(" state = off");
-        }
+      Serial1.println(":");
 
-        if(risingEdge[i])
-        {
-            Serial1.println("Rising Edge");
-        }
+      if(state[i])
+      {
+        Serial1.println(" state = on");
+      }
+      else      
+      {
+        Serial1.println(" state = off");
+      }
 
-        if(fallingEdge[i])
-        {
-            Serial1.println("Falling Edge");
-        }
-    }</Serial1Printout>
+      if(risingEdge[i])
+      {
+        Serial1.println("Rising Edge");
+      }
+
+      if(fallingEdge[i])
+      {
+        Serial1.println("Falling Edge");
+      }
+    }
+  </Serial1Printout>
 </Replacements>

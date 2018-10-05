@@ -67,8 +67,7 @@
       Serial1.print(i + 1);
         
       if(switchState[i])
-      {
-        
+      {      
         Serial1.println(" state = on");
       }
       else
@@ -85,6 +84,7 @@
       {
         Serial1.println("Falling Edge");
       }
-    }</Serial1Printout>
+    }
+  </Serial1Printout>
   
 </Replacements>

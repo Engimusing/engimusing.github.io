@@ -16,11 +16,11 @@
     float temp = MLX90614.temperature();
     Serial.print("temperature = ");
     Serial.print(temp);
-    Serial.println(" C");
-  </SerialPrintout>
+    Serial.println(" C");</SerialPrintout>
   <Serial1Printout>
     Serial1.print("temperature = ");
     Serial1.print(temp);
-    Serial1.println(" C");</Serial1Printout>
+    Serial1.println(" C");
+  </Serial1Printout>
   
 </Replacements>

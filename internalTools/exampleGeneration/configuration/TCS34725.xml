@@ -46,6 +46,7 @@
     Serial1.print(" color temperature = ");
     Serial1.print(colorTemp);
     Serial1.print(" luminance = ");
-    Serial1.println(lux);</Serial1Printout>
+    Serial1.println(lux);
+  </Serial1Printout>
   
 </Replacements>

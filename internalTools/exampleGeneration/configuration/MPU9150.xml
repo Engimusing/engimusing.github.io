@@ -82,6 +82,7 @@
     Serial1.print(aY);
     Serial1.print(",");
     Serial1.print(aZ);
-    Serial1.println(")");</Serial1Printout>
+    Serial1.println(")");
+  </Serial1Printout>
   
 </Replacements>

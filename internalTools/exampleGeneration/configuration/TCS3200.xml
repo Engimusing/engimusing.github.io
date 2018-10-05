@@ -34,6 +34,7 @@
     Serial1.print(" blue = ");
     Serial1.print(blue);
     Serial1.print(" white = ");
-    Serial1.println(white);</Serial1Printout>
+    Serial1.println(white);
+  </Serial1Printout>
   
 </Replacements>

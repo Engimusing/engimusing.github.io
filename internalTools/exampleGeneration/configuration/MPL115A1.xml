@@ -25,6 +25,7 @@
     Serial1.print(temp);
     Serial1.print(" C    Pressure = ");
     Serial1.print(pressure);
-    Serial1.println(" kPa");</Serial1Printout>
+    Serial1.println(" kPa");
+  </Serial1Printout>
   
 </Replacements>

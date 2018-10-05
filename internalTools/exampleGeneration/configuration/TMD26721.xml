@@ -22,6 +22,7 @@
     Serial.println(proximity);</SerialPrintout>
   <Serial1Printout>
     Serial1.print("proximity = ");
-    Serial1.println(proximity);</Serial1Printout>
+    Serial1.println(proximity);
+  </Serial1Printout>
   
 </Replacements>

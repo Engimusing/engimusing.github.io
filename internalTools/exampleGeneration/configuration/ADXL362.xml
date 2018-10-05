@@ -39,5 +39,6 @@
     Serial1.print(yData);
     Serial1.print(" g Z = ");
     Serial1.print(zData);
-    Serial1.println(" g");</Serial1Printout>  
+    Serial1.println(" g");
+  </Serial1Printout>  
 </Replacements>

@@ -28,6 +28,7 @@
     Serial1.print("value = ");
     Serial1.print(alertValue);
     Serial1.print(" state = ");
-    Serial1.println(state);</Serial1Printout>
+    Serial1.println(state);
+  </Serial1Printout>
   
 </Replacements>

@@ -26,8 +26,6 @@
 #error Incorrect Board Selected! Please select Engimusing {{ Strs.RS232x2BoardType }} from the Tools->Board: menu.
 #endif
 
-#include <DevicePrinter.h>
-
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceTypeSet %}
 #include <{{ device }}Device.h>
@@ -40,15 +38,12 @@
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
 {{ Strs.DeviceType[loop.index0] }}Device {{ Strs.DeviceObjName[loop.index0] }};
-DevicePrinter {{ Strs.DeviceObjName[loop.index0] }}Printer0;
-DevicePrinter {{ Strs.DeviceObjName[loop.index0] }}Printer1;
 {% endfor %}
 {% else %}
 {{ Strs.DeviceType }}Device {{ Strs.DeviceType }};
-DevicePrinter {{ Strs.DeviceType }}Printer0;
-DevicePrinter {{ Strs.DeviceType }}Printer1;
 {% endif %}
 TogglePin led;
+Timeout serialTimer;
 
 void setup()
 {
@@ -58,16 +53,8 @@ void setup()
   Serial.println("Simple {{ Strs.FilePrefix }} example 0");
   Serial1.println("Simple {{ Strs.FilePrefix }} example 1");
   led.begin(1000);
+  serialTimer.begin(1000,true);
  
-  {% if Strs.DeviceCount > 0 %}
-  {% for device in Strs.DeviceType %}
-  {{ Strs.DeviceObjName[loop.index0] }}Printer0.begin(Serial, {{ Strs.DeviceObjName[loop.index0] }}, 5000, "{{ Strs.DeviceObjName[loop.index0] }}");
-  {{ Strs.DeviceObjName[loop.index0] }}Printer1.begin(Serial1, {{ Strs.DeviceObjName[loop.index0] }}, 5000, "{{ Strs.DeviceObjName[loop.index0] }}");
-  {% endfor %}
-  {% else %}
-  {{ Strs.DeviceType }}Printer0.begin(Serial, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
-  {{ Strs.DeviceType }}Printer1.begin(Serial1, {{ Strs.DeviceType }}, 5000, "{{ Strs.DeviceType }}");
-  {% endif %}
   {{ Strs.DeviceBeginComment }}
 {% if Strs.DeviceCount > 0 %}
 {% for device in Strs.DeviceType %}
@@ -90,17 +77,14 @@ void loop()
   {{ Strs.DeviceType }}.update();
 {% endif %}
 
-{% if Strs.DeviceCount > 0 %}
-  {% for device in Strs.DeviceType %}
-  {{ Strs.DeviceObjName[loop.index0] }}Printer0.update();
-  {{ Strs.DeviceObjName[loop.index0] }}Printer1.update();
-  {% endfor %}
-  {% else %}
-  {{ Strs.DeviceType }}Printer0.update();
-  {{ Strs.DeviceType }}Printer1.update();
-  {% endif %}
   {{ Strs.SerialParser }}
   {{ Strs.Serial1Parser }}
+{% if Strs.SerialPrintout %}
+  if(serialTimer.update())
+  { {{ Strs.SerialPrintout }}
+  {{ Strs.Serial1Printout }}
+  }
+{% endif %}
   led.update();
 }
 {% endif %}

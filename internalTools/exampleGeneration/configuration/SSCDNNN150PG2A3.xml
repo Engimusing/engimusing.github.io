@@ -18,5 +18,6 @@
     Serial.println(pressure);</SerialPrintout>
   <Serial1Printout>
     Serial1.print("Pressure = ");
-    Serial1.println(pressure);</Serial1Printout>
+    Serial1.println(pressure);
+  </Serial1Printout>
 </Replacements>

@@ -51,22 +51,22 @@
   {
     if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;N&apos;)
     {
-        CPC1002N_0.setState(true);
+      CPC1002N_0.setState(true);
     }
     else if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;F&apos;)
     {
-        CPC1002N_0.setState(false);
+      CPC1002N_0.setState(false);
     }
   }
   if(buffer[0] == &apos;1&apos;)
   {
     if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;N&apos;)
     {
-        CPC1002N_1.setState(true);
+      CPC1002N_1.setState(true);
     }
     else if(buffer[2] == &apos;O&apos; &amp;&amp; buffer[3] == &apos;F&apos;)
     {
-        CPC1002N_1.setState(false);
+      CPC1002N_1.setState(false);
     }
   }</SerialParser>
   <Serial1Parser>
@@ -75,34 +75,35 @@
   //Parse Serial1 port and if 0:ON, 0:OF, 1:ON, or 1:OF are sent  then turn on or of the DC relays
   if(Serial1.available())
   {
-      for(int i = 0; i &lt; 3; i++)
-      {
-        buffer1[i] = buffer1[i+1];
-      }
-      
-      buffer1[3] = Serial1.read();
+    for(int i = 0; i &lt; 3; i++)
+    {
+      buffer1[i] = buffer1[i+1];
+    }
+    
+    buffer1[3] = Serial1.read();
   }
   
   if(buffer1[0] == &apos;0&apos;)
   {
     if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;N&apos;)
     {
-        CPC1002N_0.setState(true);
+      CPC1002N_0.setState(true);
     }
     else if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;F&apos;)
     {
-        CPC1002N_0.setState(false);
+      CPC1002N_0.setState(false);
     }
   }
   if(buffer1[0] == &apos;1&apos;)
   {
     if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;N&apos;)
     {
-        CPC1002N_1.setState(true);
+      CPC1002N_1.setState(true);
     }
     else if(buffer1[2] == &apos;O&apos; &amp;&amp; buffer1[3] == &apos;F&apos;)
     {
-        CPC1002N_1.setState(false);
+      CPC1002N_1.setState(false);
     }
-  }</Serial1Parser>  
+  }
+  </Serial1Parser>  
 </Replacements>

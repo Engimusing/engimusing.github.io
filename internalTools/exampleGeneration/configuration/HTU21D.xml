@@ -24,6 +24,7 @@
     Serial1.print("temperature = ");
     Serial1.print(temp);
     Serial1.print("   humidity = ");
-    Serial1.println(hum);</Serial1Printout>
+    Serial1.println(hum);
+  </Serial1Printout>
   
 </Replacements>

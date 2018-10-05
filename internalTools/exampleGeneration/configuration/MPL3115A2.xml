@@ -30,6 +30,7 @@
     Serial1.print(altitude);
     Serial1.print(" M temperature = ");
     Serial1.print(temp);
-    Serial1.println(" C");</Serial1Printout>
+    Serial1.println(" C");
+  </Serial1Printout>
   
 </Replacements>
