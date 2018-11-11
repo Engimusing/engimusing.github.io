@@ -11,6 +11,38 @@
 {
 "name": "Engimusing ARM EFM32 Boards",
 "architecture": "efm32",
+"version": "1.0.4",
+"category": "Contributed",
+"url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.4.tar.gz",
+"archiveFileName": "efm32-1.0.4.tar.gz",
+"checksum": "SHA-256:375a7234608cb320c381a3c73c23f07a80c228c7a642fbf2d7112ac2c5dd87d1",
+"size": "5305215",
+"help": {
+"online": "http://www.engimusing.com"
+},
+"boards": [
+{"name": "EFM32ZGUSB"},
+{"name": "EFM32ZG108"},
+{"name": "EFM32ZG222"},
+{"name": "EFM32TG110"},
+{"name": "EFM32G232"},
+{"name": "EFM32WG840"},
+{"name": "EFM32WG842"}
+],
+"toolsDependencies": [{
+"packager": "arduino",
+"name": "arm-none-eabi-gcc",
+"version": "4.8.3-2014q1"
+},
+{
+"packager": "engimusing",
+"name": "efm_tools",
+"version": "1.1"
+}]
+},
+{
+"name": "Engimusing ARM EFM32 Boards",
+"architecture": "efm32",
 "version": "1.0.3",
 "category": "Contributed",
 "url": "http://engimusing.github.io/arduinoIDE/efm32-1.0.3.tar.gz",

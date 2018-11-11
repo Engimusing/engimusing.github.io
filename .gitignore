@@ -3,3 +3,5 @@
 */*/exampleBuildLogs/*
 */*/tempBuildDir/*
 */*/tempDocs
+*/exampleGeneration/output*
+*.pyc

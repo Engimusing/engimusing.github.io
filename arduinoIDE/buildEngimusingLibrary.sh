@@ -1,4 +1,4 @@
-export VERSION=1.0.3
+export VERSION=1.0.4
 
 export BUILD_TOOLS=0
 export TOOLS_VERSION=1.1
