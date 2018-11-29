@@ -9,7 +9,7 @@ cd $VERSION
 git clone https://github.com/Engimusing/engimusing-firmware.git .
 cp ./platform.txt ./platform2.txt
 sed '19s/.*/version='$VERSION'/' platform2.txt > platform.txt
-rm ./platform2.txt
+rm -f ./platform2.txt
 
 git add platform.txt
 git commit -m 'Moving platform.txt upto the new version:'$VERSION
@@ -18,7 +18,7 @@ cd ..
 
 tar czvf efm32-$VERSION.tar.gz $VERSION
 
-rm -r $VERSION
+rm -rf $VERSION
 
 if [ $BUILD_TOOLS -eq 1 ]
 then
@@ -67,11 +67,11 @@ echo	}] >> buffer.json
 echo	}, >> buffer.json
 
 cat package_engimusing_modules_index_part2.json >> buffer.json
-mv buffer.json package_engimusing_modules_index_part2.json
+mv -f buffer.json package_engimusing_modules_index_part2.json
 
 cat package_engimusing_modules_index_part1.json > final.json
 cat package_engimusing_modules_index_part2.json >> final.json
 cat ./tools/modules.json >> final.json
 cat package_engimusing_modules_index_part3.json >> final.json
 
-mv final.json package_engimusing_modules_index.json
+mv -f final.json package_engimusing_modules_index.json
